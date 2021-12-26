@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/constraints/colors.dart';
 
 class CustomCheckBox extends StatelessWidget {
   const CustomCheckBox({
@@ -20,7 +19,7 @@ class CustomCheckBox extends StatelessWidget {
           splashRadius: 0.0,
           onChanged: onChecked,
           side: const BorderSide(color: Colors.white, width: 2.0),
-          activeColor: Palette.secondary,
+          activeColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4.0),
           ),

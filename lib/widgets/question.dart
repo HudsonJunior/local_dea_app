@@ -37,7 +37,7 @@ class QuestionWidget extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Palette.primary,
-                      fontSize: 16,
+                      fontSize: 18,
                     ),
                   ),
                   const Spacer(),
@@ -80,6 +80,8 @@ class QuestionWidget extends StatelessWidget {
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             height: 1.2,
+                            letterSpacing: 1.1,
+                            fontSize: 18,
                           ),
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/screens/about.dart';
 import 'package:local_dea_app/screens/frequently_questions.dart';
 import 'package:local_dea_app/screens/register_dea.dart';
 import 'package:local_dea_app/widgets/menu_card.dart';
@@ -55,7 +56,13 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             const SizedBox(height: 12.0),
             MenuCard(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const AboutScreen(),
+                  ),
+                );
+              },
               icon: FontAwesomeIcons.infoCircle,
               title: 'Sobre',
             ),

@@ -26,7 +26,7 @@ class CustomImagePicker extends StatelessWidget {
                 children: const [
                   Icon(
                     FontAwesomeIcons.camera,
-                    color: Palette.secondary,
+                    color: Colors.white,
                   ),
                   SizedBox(height: 16.0),
                   Text(

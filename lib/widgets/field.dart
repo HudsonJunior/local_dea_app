@@ -15,48 +15,58 @@ class CustomFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      style: const TextStyle(color: Colors.white),
-      controller: controller,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          icon,
-          color: Palette.secondary,
-        ),
-        label: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 20.0,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              label,
+              textAlign: TextAlign.start,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
-        labelStyle: const TextStyle(
-          fontSize: 16.0,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
+        const SizedBox(height: 4.0),
+        TextFormField(
+          style: const TextStyle(color: Colors.white),
+          controller: controller,
+          decoration: InputDecoration(
+            fillColor: Colors.grey[200],
+            filled: true,
+            prefixIcon: Icon(
+              icon,
+              color: Palette.primary,
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            floatingLabelStyle: const TextStyle(
+              fontSize: 16.0,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+          ),
         ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        floatingLabelStyle: const TextStyle(
-          fontSize: 16.0,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-      ),
+      ],
     );
   }
 }
