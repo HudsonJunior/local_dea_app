@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:local_dea_app/blocs/map.dart';
 import 'package:local_dea_app/screens/map.dart';
 
 void main() {
@@ -16,7 +18,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MapScreen(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<MapCubit>(
+            create: (_) => MapCubit(),
+          )
+        ],
+        child: const MapScreen(),
+      ),
     );
   }
 }

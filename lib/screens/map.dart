@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
 import 'package:local_dea_app/screens/menu.dart';
+import 'package:local_dea_app/widgets/map/emergency_fab.dart';
+import 'package:local_dea_app/widgets/map/map_widget.dart';
 import 'package:local_dea_app/widgets/route_method.dart';
 import 'package:local_dea_app/widgets/search_dea_button.dart';
 
@@ -15,13 +17,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final Completer<GoogleMapController> _controller = Completer();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,15 +57,7 @@ class _MapScreenState extends State<MapScreen> {
       ),
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            myLocationButtonEnabled: true,
-            zoomControlsEnabled: false,
-            myLocationEnabled: true,
-          ),
+          const MapWidget(),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -84,6 +71,8 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ],
       ),
+      floatingActionButton: const EmergencyFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
     );
   }
 }
