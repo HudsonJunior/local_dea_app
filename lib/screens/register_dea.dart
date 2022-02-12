@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/models/emergency_service_type.dart';
 import 'package:local_dea_app/widgets/app_bar_content.dart';
 import 'package:local_dea_app/widgets/field.dart';
-import 'package:local_dea_app/widgets/register_dea/checkbox.dart';
-import 'package:local_dea_app/widgets/register_dea/date_picker.dart';
+import 'package:local_dea_app/widgets/register_dea/category_dea.dart';
 import 'package:local_dea_app/widgets/register_dea/hour_range.dart';
 import 'package:local_dea_app/widgets/register_dea/image_picker.dart';
 import 'package:local_dea_app/widgets/register_dea/private_service_checkbox.dart';
@@ -18,6 +17,21 @@ class RegisterDeaScreen extends StatefulWidget {
 }
 
 class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
+  EmergencyServiceType selectedCategoryDea = EmergencyServiceType.dea;
+  bool _isChecked = false;
+
+  void _onSelectedDeaCategory(EmergencyServiceType? type) {
+    setState(() {
+      selectedCategoryDea = type ?? EmergencyServiceType.dea;
+    });
+  }
+
+  void _onCheckedCheckbox(bool? isChecked) {
+    setState(() {
+      _isChecked = isChecked ?? false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +69,7 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
                     child: CustomFormField(
                       label: 'Número',
                       icon: Icons.house,
+                      keyboardType: TextInputType.number,
                       controller: TextEditingController(),
                     ),
                   ),
@@ -70,6 +85,7 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
               ),
               const SizedBox(height: 16.0),
               CustomFormField(
+                keyboardType: TextInputType.phone,
                 label: 'Telefone de contato',
                 icon: Icons.contact_phone,
                 controller: TextEditingController(),
@@ -83,7 +99,15 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
               const SizedBox(height: 16.0),
               const HourRangeWidget(),
               const SizedBox(height: 16.0),
-              const PrivateServiceCheckbox(),
+              CategoryDeaSelector(
+                selected: selectedCategoryDea,
+                onSelected: _onSelectedDeaCategory,
+              ),
+              const SizedBox(height: 16.0),
+              PrivateServiceCheckbox(
+                isChecked: _isChecked,
+                onChecked: _onCheckedCheckbox,
+              ),
               const SizedBox(height: 16.0),
               const CustomImagePicker(),
               const SizedBox(height: 32.0),

@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
 import 'package:local_dea_app/screens/menu.dart';
 import 'package:local_dea_app/widgets/map/emergency_fab.dart';

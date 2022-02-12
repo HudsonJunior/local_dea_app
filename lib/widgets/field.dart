@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:local_dea_app/constraints/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   final IconData icon;
   final String label;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
 
   const CustomFormField({
     Key? key,
     required this.icon,
     required this.label,
     required this.controller,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -33,7 +36,11 @@ class CustomFormField extends StatelessWidget {
         ),
         const SizedBox(height: 4.0),
         TextFormField(
-          style: const TextStyle(color: Colors.white),
+          keyboardType: keyboardType,
+          style: const TextStyle(
+            color: Palette.primary,
+            fontWeight: FontWeight.w700,
+          ),
           controller: controller,
           decoration: InputDecoration(
             fillColor: Colors.grey[200],

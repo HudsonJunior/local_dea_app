@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/resources/launcher_service.dart';
 import 'package:local_dea_app/screens/about.dart';
 import 'package:local_dea_app/screens/frequently_questions.dart';
 import 'package:local_dea_app/screens/register_dea.dart';
+import 'package:local_dea_app/widgets/custom_snackbar.dart';
 import 'package:local_dea_app/widgets/menu_card.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -21,21 +23,9 @@ class _MenuScreenState extends State<MenuScreen> {
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: Palette.primary,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/dea_icon.png',
-              width: 50,
-              height: 50,
-            ),
-            const SizedBox(width: 8.0),
-            const Expanded(
-                child: Text(
-              'Local DEA - Menu',
-              style: TextStyle(color: Colors.white),
-            )),
-          ],
+        title: const Text(
+          'Menu',
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: Padding(
@@ -43,6 +33,18 @@ class _MenuScreenState extends State<MenuScreen> {
         child: Column(
           children: [
             const SizedBox(height: 24.0),
+            MenuCard(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const RegisterDeaScreen(),
+                  ),
+                );
+              },
+              icon: Icons.location_on,
+              title: 'Cadastrar Serviço',
+            ),
+            const SizedBox(height: 12.0),
             MenuCard(
               onTap: () {
                 Navigator.of(context).push(
@@ -68,22 +70,19 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             const SizedBox(height: 12.0),
             MenuCard(
-              onTap: () {},
-              icon: FontAwesomeIcons.comment,
-              title: 'Sugestões',
-            ),
-            const SizedBox(height: 12.0),
-            MenuCard(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const RegisterDeaScreen(),
-                  ),
-                );
+              onTap: () async {
+                try {
+                  LauncherManager.instance.launchMailer();
+                } on Exception {
+                  CustomSnackBar.show(
+                    context,
+                    'Não foi possível abrir aplicativo de e-mail.',
+                  );
+                }
               },
-              icon: Icons.location_on,
-              title: 'Cadastrar Serviço',
-            )
+              icon: FontAwesomeIcons.comment,
+              title: 'Enviar sugestão',
+            ),
           ],
         ),
       ),

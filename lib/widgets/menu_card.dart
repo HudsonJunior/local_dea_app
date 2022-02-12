@@ -34,12 +34,16 @@ class MenuCard extends StatelessWidget {
                 color: Palette.primary,
               ),
               const SizedBox(width: 18.0),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Palette.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Palette.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ],

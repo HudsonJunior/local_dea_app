@@ -1,10 +1,10 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/blocs/map.dart';
 import 'package:local_dea_app/widgets/loading_widget.dart';
 import 'package:local_dea_app/widgets/retry_widget.dart';
+import 'package:location/location.dart';
 
 class MapWidget extends StatefulWidget {
   const MapWidget({Key? key}) : super(key: key);
@@ -22,7 +22,8 @@ class _MapWidgetState extends State<MapWidget> {
     mapCubit = BlocProvider.of<MapCubit>(context)..validateLocationPermission();
   }
 
-  final Completer<GoogleMapController> _controller = Completer();
+  late final GoogleMapController _controller;
+  final Location _location = Location();
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,6 @@ class _MapWidgetState extends State<MapWidget> {
       listener: (context, state) async {
         if (state is PermissionGrantedState) {
           mapCubit.loadMapData();
-        }
-        if (state is LoadedDataState) {
-          // await _getMarkers(state.coordenadas);
         }
       },
       builder: (context, state) {
@@ -48,9 +46,26 @@ class _MapWidgetState extends State<MapWidget> {
               zoom: 16,
             ),
             onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
+              _controller = controller;
+              _location.onLocationChanged.listen(
+                (l) {
+                  _controller.animateCamera(
+                    CameraUpdate.newCameraPosition(
+                      CameraPosition(
+                        target: l.latitude == null || l.longitude == null
+                            ? state.coordenadas
+                            : LatLng(
+                                l.latitude!,
+                                l.longitude!,
+                              ),
+                        zoom: 15,
+                      ),
+                    ),
+                  );
+                },
+              );
             },
-            myLocationButtonEnabled: true,
+            compassEnabled: true,
             zoomControlsEnabled: false,
             markers: state.markers.values.toSet(),
             myLocationEnabled: true,

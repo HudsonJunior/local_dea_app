@@ -12,35 +12,38 @@ class RetryWidget extends StatelessWidget {
   final VoidCallback onRetry;
 
   @override
-  Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Palette.primary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextButton.icon(
-              onPressed: onRetry,
-              icon: const Icon(
-                Icons.refresh,
-                color: Palette.secondary,
-              ),
-              label: const Text(
-                'Tentar novamente',
-                style: TextStyle(
-                  color: Palette.secondary,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Palette.primary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              TextButton.icon(
+                onPressed: onRetry,
+                icon: const Icon(
+                  Icons.refresh,
+                  color: Palette.secondary,
+                ),
+                label: const Text(
+                  'Tentar novamente',
+                  style: TextStyle(
+                    color: Palette.secondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:local_dea_app/resources/launcher_service.dart';
+import 'package:local_dea_app/widgets/custom_snackbar.dart';
 
 class EmergencyFab extends StatefulWidget {
   const EmergencyFab({Key? key}) : super(key: key);
@@ -13,9 +15,18 @@ class _EmergencyFabState extends State<EmergencyFab> {
     return Padding(
       padding: const EdgeInsets.only(top: kToolbarHeight),
       child: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () async {
+          try {
+            LauncherManager.instance.launchDialer('192');
+          } on Exception {
+            CustomSnackBar.show(
+              context,
+              'Não foi possível ligar para o SAMU',
+            );
+          }
+        },
         backgroundColor: Colors.red,
-        label: const Text('Ligar emergência'),
+        label: const Text('Ligar para o SAMU'),
         icon: const Icon(Icons.phone),
       ),
     );
