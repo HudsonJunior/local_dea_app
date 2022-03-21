@@ -69,7 +69,6 @@ class MapUseCase {
         markers: serviceMarkers,
       );
     } catch (e) {
-      print(e);
       return null;
     }
   }

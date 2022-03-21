@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:local_dea_app/constraints/colors.dart';
-
 class AppBarContent extends StatelessWidget {
   final String title;
 

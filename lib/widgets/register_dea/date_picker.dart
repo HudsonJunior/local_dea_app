@@ -1,5 +1,6 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:local_dea_app/widgets/field.dart';
 
 class CustomHourPicker extends StatefulWidget {
@@ -10,12 +11,13 @@ class CustomHourPicker extends StatefulWidget {
   final TimeOfDay? referenceDate;
 
   const CustomHourPicker({
+    Key? key,
     required this.label,
     required this.onSelectedHour,
     this.selectedHour,
     this.isEndDate = false,
     this.referenceDate,
-  });
+  }) : super(key: key);
 
   @override
   _CustomDatePickerState createState() => _CustomDatePickerState();
