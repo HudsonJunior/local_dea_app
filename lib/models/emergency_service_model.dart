@@ -19,14 +19,14 @@ class EmergencyServiceModel {
   final String nome;
   final String rua;
   final int numero;
-  final String bairro;
-  final String horarioAbertura;
-  final String horarioFechamento;
+  final String? bairro;
+  final String? horarioAbertura;
+  final String? horarioFechamento;
   final double latitude;
   final double longitude;
-  final String descricao;
+  final String? descricao;
   final EmergencyServiceType categoria;
-  final String numContato;
+  final String? numContato;
   final bool isPrivado;
 
   static Iterable<EmergencyServiceModel> fromJsonList(List list) => list.map(
@@ -39,31 +39,30 @@ class EmergencyServiceModel {
       'rua': rua,
       'numero': numero,
       'bairro': bairro,
-      'horarioAbertura': horarioAbertura,
-      'horarioFechamento': horarioFechamento,
+      'inicio': horarioAbertura,
+      'fim': horarioFechamento,
       'latitude': latitude,
       'longitude': longitude,
       'descricao': descricao,
       'categoria': categoria.value,
-      'numContato': numContato,
+      'contato': numContato,
       'isPrivado': isPrivado,
     };
   }
 
   factory EmergencyServiceModel.fromJson(dynamic map) {
-    print(map);
     return EmergencyServiceModel(
       nome: map['nome'] ?? '',
       rua: map['rua'] ?? '',
       numero: map['numero']?.toInt() ?? 0,
       bairro: map['bairro'] ?? '',
-      horarioAbertura: map['horarioAbertura'] ?? '',
-      horarioFechamento: map['horarioFechamento'] ?? '',
+      horarioAbertura: map['inicio'] ?? '',
+      horarioFechamento: map['fim'] ?? '',
       latitude: map['latitude']?.toDouble() ?? 0.0,
       longitude: map['longitude']?.toDouble() ?? 0.0,
       descricao: map['descricao'] ?? '',
       categoria: EmergencyServiceExt.fromInt((map['categoria'])),
-      numContato: map['numContato'] ?? '',
+      numContato: map['contato'] ?? '',
       isPrivado: map['isPrivado'] ?? false,
     );
   }

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:local_dea_app/models/emergency_service_model.dart';
-import 'package:local_dea_app/resources/api.dart';
+import 'package:local_dea_app/resources/search_api.dart';
 import 'package:local_dea_app/resources/api_response.dart';
 
 class DeaRemoteDatasource {
-  final Api api;
+  final SearchApi api;
 
   DeaRemoteDatasource({
     required this.api,

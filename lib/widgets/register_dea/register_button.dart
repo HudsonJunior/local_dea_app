@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/widgets/loading_widget.dart';
 
 class RegisterButton extends StatelessWidget {
-  const RegisterButton({Key? key}) : super(key: key);
+  const RegisterButton({
+    Key? key,
+    required this.onRegisterDea,
+    this.isLoading = false,
+  }) : super(key: key);
+
+  final VoidCallback onRegisterDea;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +25,23 @@ class RegisterButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Text(
-            'Cadastrar serviço',
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Palette.primary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        onPressed: onRegisterDea,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: isLoading
+              ? const SizedBox(
+                  child: LoadingWidget(),
+                  height: 20,
+                  width: 20,
+                )
+              : const Text(
+                  'Cadastrar serviço',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Palette.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         ),
       ),
     );

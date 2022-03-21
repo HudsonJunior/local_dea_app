@@ -7,13 +7,17 @@ class CustomFormField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final TextInputType? keyboardType;
+  final bool isRequired;
+  final ValueGetter<String?>? validator;
 
   const CustomFormField({
     Key? key,
     required this.icon,
     required this.label,
     required this.controller,
+    this.isRequired = true,
     this.keyboardType,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -45,6 +49,8 @@ class CustomFormField extends StatelessWidget {
           decoration: InputDecoration(
             fillColor: Colors.grey[200],
             filled: true,
+            errorStyle: const TextStyle(color: Colors.white),
+            errorMaxLines: 2,
             prefixIcon: Icon(
               icon,
               color: Palette.primary,
@@ -72,6 +78,13 @@ class CustomFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(18.0),
             ),
           ),
+          validator: (text) {
+            if ((text?.isEmpty ?? true) && isRequired) {
+              return 'Campo obrigatório!';
+            }
+            if (validator != null) return validator!();
+            return null;
+          },
         ),
       ],
     );

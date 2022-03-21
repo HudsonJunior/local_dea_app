@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/constraints/colors.dart';
 
 class CustomSnackBar {
-  static SnackBar snackbar(String message) => SnackBar(
+  static SnackBar snackbar(String message, bool success) => SnackBar(
         elevation: 5.0,
-        backgroundColor: Palette.secondary,
+        backgroundColor: !success ? Colors.redAccent : Colors.greenAccent,
         content: Text(
           message,
           style: const TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
       );
 
-  static show(BuildContext context, String message) =>
+  static show(BuildContext context, String message, {bool? success}) =>
       ScaffoldMessenger.of(context).showSnackBar(
-        snackbar(message),
+        snackbar(message, success ?? true),
       );
 }

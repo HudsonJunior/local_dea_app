@@ -51,10 +51,10 @@ class MapUseCase {
       final serviceMarkers = <String, Marker>{};
 
       for (var dea in deas) {
-        final id = dea.nome + dea.descricao + dea.hashCode.toString();
+        final id = dea.nome + dea.hashCode.toString() + (dea.descricao ?? '');
         serviceModels[id] = dea;
         serviceMarkers[id] = Marker(
-          markerId: MarkerId(dea.nome + dea.descricao),
+          markerId: MarkerId(dea.nome + (dea.descricao ?? '')),
           icon: dea.categoria == EmergencyServiceType.dea
               ? deaIcon
               : dea.categoria == EmergencyServiceType.hospital
