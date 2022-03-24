@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
 
 class CustomFormField extends StatelessWidget {
@@ -9,6 +9,7 @@ class CustomFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool isRequired;
   final ValueGetter<String?>? validator;
+  final List<MaskTextInputFormatter>? formatters;
 
   const CustomFormField({
     Key? key,
@@ -18,6 +19,7 @@ class CustomFormField extends StatelessWidget {
     this.isRequired = true,
     this.keyboardType,
     this.validator,
+    this.formatters,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class CustomFormField extends StatelessWidget {
         const SizedBox(height: 4.0),
         TextFormField(
           keyboardType: keyboardType,
+          inputFormatters: formatters,
           style: const TextStyle(
             color: Palette.primary,
             fontWeight: FontWeight.w700,

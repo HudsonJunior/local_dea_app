@@ -13,13 +13,16 @@ class RegisterDeaRemoteDatasource {
     EmergencyServiceModel model,
   ) async {
     try {
+      // TODO finalizar
+      return SuccessApiResponse(data: null);
+
       await api.dio.post(
         '/mobile/local_dea',
         data: model.toJson(),
       );
 
       return SuccessApiResponse(data: null);
-    } catch (error) {
+    } catch (_) {
       return FailApiResponse(
         error: 'Não foi possível cadastrar o DEA.',
       );

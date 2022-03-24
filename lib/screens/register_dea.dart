@@ -11,6 +11,7 @@ import 'package:local_dea_app/widgets/register_dea/hour_range.dart';
 import 'package:local_dea_app/widgets/register_dea/image_picker.dart';
 import 'package:local_dea_app/widgets/register_dea/private_service_checkbox.dart';
 import 'package:local_dea_app/widgets/register_dea/register_button.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterDeaScreen extends StatefulWidget {
   const RegisterDeaScreen({Key? key}) : super(key: key);
@@ -145,6 +146,12 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
                   isRequired: false,
                   icon: Icons.contact_phone,
                   controller: contactNumberController,
+                  formatters: [
+                    MaskTextInputFormatter(
+                      mask: '(##) # ####-####',
+                      type: MaskAutoCompletionType.lazy,
+                    )
+                  ],
                 ),
                 const SizedBox(height: 16.0),
                 CustomFormField(

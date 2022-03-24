@@ -14,6 +14,6 @@ class SearchPlaceModel {
     required this.street,
     required this.houseNumber,
     this.postalCode,
-    this.complement = 'Zona 07',
+    this.complement,
   });
 }

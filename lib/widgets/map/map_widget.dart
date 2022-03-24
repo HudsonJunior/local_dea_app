@@ -4,7 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/blocs/map/map.dart';
 import 'package:local_dea_app/widgets/loading_widget.dart';
 import 'package:local_dea_app/widgets/retry_widget.dart';
-import 'package:location/location.dart';
 
 class MapWidget extends StatefulWidget {
   const MapWidget({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class _MapWidgetState extends State<MapWidget> {
   }
 
   late final GoogleMapController _controller;
-  final Location _location = Location();
+  // final Location _location = Location()..enableBackgroundMode(enable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +46,23 @@ class _MapWidgetState extends State<MapWidget> {
             ),
             onMapCreated: (GoogleMapController controller) {
               _controller = controller;
-              _location.onLocationChanged.listen(
-                (l) {
-                  _controller.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                      CameraPosition(
-                        target: l.latitude == null || l.longitude == null
-                            ? state.coordenadas
-                            : LatLng(
-                                l.latitude!,
-                                l.longitude!,
-                              ),
-                        zoom: 15,
-                      ),
-                    ),
-                  );
-                },
-              );
+              // TODO: Corrigir camera que foca automaticamente. Só mover a camera quando
+              // algum caminho estiver sendo buscado.
+              // _location.onLocationChanged.listen(
+              //   (l) {
+              //     _controller.animateCamera(
+              //       CameraUpdate.newCameraPosition(
+              //         CameraPosition(
+              //           target: LatLng(
+              //             l.latitude ?? 0.0,
+              //             l.longitude ?? 0.0,
+              //           ),
+              //           zoom: 15,
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // );
             },
             compassEnabled: true,
             zoomControlsEnabled: false,

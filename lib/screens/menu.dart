@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:local_dea_app/constraints/colors.dart';
 import 'package:local_dea_app/resources/launcher_service.dart';
 import 'package:local_dea_app/screens/about.dart';
+import 'package:local_dea_app/screens/dea_guide.dart';
 import 'package:local_dea_app/screens/frequently_questions.dart';
 import 'package:local_dea_app/screens/register_dea.dart';
 import 'package:local_dea_app/widgets/custom_snackbar.dart';
@@ -53,8 +54,20 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 );
               },
-              icon: FontAwesomeIcons.questionCircle,
+              icon: FontAwesomeIcons.solidQuestionCircle,
               title: 'Perguntas frequentes',
+            ),
+            const SizedBox(height: 12.0),
+            MenuCard(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const DeaGuideScreen(),
+                  ),
+                );
+              },
+              icon: FontAwesomeIcons.bookMedical,
+              title: 'Guia de Reanimação Cardiopulmonar',
             ),
             const SizedBox(height: 12.0),
             MenuCard(
@@ -80,7 +93,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   );
                 }
               },
-              icon: FontAwesomeIcons.comment,
+              icon: FontAwesomeIcons.solidComment,
               title: 'Enviar sugestão',
             ),
           ],

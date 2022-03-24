@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   bloc: ^8.0.1
+  carousel_slider: ^4.0.0
   dio: ^4.0.4
   flutter:
     sdk: flutter
@@ -20,6 +21,7 @@ dependencies:
   google_maps_flutter: ^2.1.0
   intl: ^0.17.0
   location: ^4.3.0
+  mask_text_input_formatter: ^2.1.0
   url_launcher: ^6.0.20
 
 dev_dependencies:
@@ -35,3 +37,9 @@ flutter:
     - assets/dea_icon_marker.png
     - assets/edificio-hospitalar.png
     - assets/samu_icon.png
+    - assets/Fluxo1.png
+    - assets/Fluxo2.png
+    - assets/Fluxo3.png
+    - assets/Fluxo4.png
+    - assets/Fluxo5.png
+    - assets/Fluxo6.png
