@@ -8,7 +8,7 @@ class InitialMapState extends MapState {}
 
 class LoadedDataState extends MapState {
   final LatLng coordenadas;
-  final Map<String, Marker> markers;
+  final Map<String, MarkerModel> markers;
   final Map<String, EmergencyServiceModel> models;
 
   LoadedDataState({

@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/datasources/dea_remote_datasource.dart';
 import 'package:local_dea_app/models/emergency_service_model.dart';
+import 'package:local_dea_app/models/marker_model.dart';
 import 'package:local_dea_app/repositories/dea_repository.dart';
 import 'package:local_dea_app/resources/search_api.dart';
 import 'package:local_dea_app/usecase/map_usecase.dart';

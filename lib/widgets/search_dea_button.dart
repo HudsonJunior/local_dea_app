@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SearchDeaButton extends StatelessWidget {
-  const SearchDeaButton({Key? key}) : super(key: key);
+  const SearchDeaButton({
+    Key? key,
+    this.label,
+  }) : super(key: key);
+
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +21,11 @@ class SearchDeaButton extends StatelessWidget {
           ),
         ),
         onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.all(12.0),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
           child: Text(
-            'BUSCAR DEA',
-            style: TextStyle(
+            label ?? 'BUSCAR DEA',
+            style: const TextStyle(
               fontSize: 20.0,
             ),
           ),

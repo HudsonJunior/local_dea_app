@@ -21,73 +21,93 @@ class QuestionWidget extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Card(
-            color: Colors.white,
-            elevation: 4.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+          Tooltip(
+            textStyle: const TextStyle(
+              fontSize: 18.0,
+              color: Palette.primary,
+              fontWeight: FontWeight.bold,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  const SizedBox(width: 12.0),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Palette.primary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const Spacer(),
-                  const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Palette.primary,
-                  ),
-                  const SizedBox(width: 12.0),
-                ],
+            padding: const EdgeInsets.all(12.0),
+            margin: const EdgeInsets.symmetric(horizontal: 12.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Palette.primary,
               ),
             ),
-          ),
-          AnimatedSwitcher(
-            duration: !isSelected
-                ? const Duration(milliseconds: 300)
-                : const Duration(milliseconds: 0),
-            switchInCurve: Curves.bounceIn,
-            switchOutCurve: Curves.bounceOut,
-            child: isSelected
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6.0,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black54,
-                            blurRadius: 4.0,
-                            offset: Offset(0.75, 0.0),
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          answer,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            height: 1.2,
-                            letterSpacing: 1.1,
-                            fontSize: 18,
-                          ),
+            message: title,
+            child: Card(
+              color: Colors.white,
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 12.0),
+                    Expanded(
+                      flex: 4,
+                      child: Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Palette.primary,
+                          fontSize: 18,
                         ),
                       ),
                     ),
-                  )
-                : const SizedBox.shrink(),
+                    const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Palette.primary,
+                    ),
+                    const SizedBox(width: 12.0),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          AnimatedCrossFade(
+            duration: const Duration(milliseconds: 250),
+            firstCurve: Curves.bounceIn,
+            secondCurve: Curves.bounceIn,
+            crossFadeState: isSelected
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            firstChild: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 6.0,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black54,
+                      blurRadius: 4.0,
+                      offset: Offset(0.75, 0.0),
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    answer,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      height: 1.2,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            secondChild: const SizedBox.shrink(),
           ),
         ],
       ),

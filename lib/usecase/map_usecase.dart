@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/models/emergency_service_marker.dart';
 import 'package:local_dea_app/models/emergency_service_model.dart';
 import 'package:local_dea_app/models/emergency_service_type.dart';
+import 'package:local_dea_app/models/marker_model.dart';
 import 'package:local_dea_app/repositories/dea_repository.dart';
 
 class MapUseCase {
@@ -48,19 +49,22 @@ class MapUseCase {
       if (deas.isEmpty) return null;
 
       final serviceModels = <String, EmergencyServiceModel>{};
-      final serviceMarkers = <String, Marker>{};
+      final serviceMarkers = <String, MarkerModel>{};
 
       for (var dea in deas) {
         final id = dea.nome + dea.hashCode.toString() + (dea.descricao ?? '');
         serviceModels[id] = dea;
-        serviceMarkers[id] = Marker(
-          markerId: MarkerId(dea.nome + (dea.descricao ?? '')),
+        serviceMarkers[id] = MarkerModel(
           icon: dea.categoria == EmergencyServiceType.dea
               ? deaIcon
               : dea.categoria == EmergencyServiceType.hospital
                   ? hospitalIcon
                   : samuIcon,
+          id: MarkerId(
+            dea.nome + (dea.descricao ?? ''),
+          ),
           position: LatLng(dea.latitude, dea.longitude),
+          service: dea,
         );
       }
 

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/blocs/map/map.dart';
+import 'package:local_dea_app/constraints/colors.dart';
 import 'package:local_dea_app/widgets/loading_widget.dart';
+import 'package:local_dea_app/widgets/map/custom_info_window.dart';
 import 'package:local_dea_app/widgets/retry_widget.dart';
 
 class MapWidget extends StatefulWidget {
@@ -14,6 +16,8 @@ class MapWidget extends StatefulWidget {
 
 class _MapWidgetState extends State<MapWidget> {
   late final MapCubit mapCubit;
+  late final GoogleMapController _controller;
+  // final Location _location = Location()..enableBackgroundMode(enable: true);
 
   @override
   void initState() {
@@ -21,8 +25,11 @@ class _MapWidgetState extends State<MapWidget> {
     mapCubit = BlocProvider.of<MapCubit>(context)..validateLocationPermission();
   }
 
-  late final GoogleMapController _controller;
-  // final Location _location = Location()..enableBackgroundMode(enable: true);
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +73,30 @@ class _MapWidgetState extends State<MapWidget> {
             },
             compassEnabled: true,
             zoomControlsEnabled: false,
-            markers: state.markers.values.toSet(),
+            markers: state.markers.values
+                .map(
+                  (marker) => Marker(
+                    markerId: marker.id,
+                    icon: marker.icon,
+                    position: marker.position,
+                    onTap: () {
+                      showModalBottomSheet(
+                        backgroundColor: Palette.primary,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16.0),
+                            topRight: Radius.circular(16.0),
+                          ),
+                        ),
+                        context: context,
+                        builder: (context) {
+                          return EmergencyInfoWindow(model: marker.service);
+                        },
+                      );
+                    },
+                  ),
+                )
+                .toSet(),
             myLocationEnabled: true,
           );
         }
