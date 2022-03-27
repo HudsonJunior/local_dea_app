@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:local_dea_app/blocs/routing/routing.dart';
 import 'package:local_dea_app/constraints/colors.dart';
 
 import 'package:local_dea_app/models/emergency_service_model.dart';
@@ -11,9 +13,11 @@ class EmergencyInfoWindow extends StatelessWidget {
   const EmergencyInfoWindow({
     Key? key,
     required this.model,
+    required this.onCalculateRoute,
   }) : super(key: key);
 
   final EmergencyServiceModel model;
+  final VoidCallback onCalculateRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +82,14 @@ class EmergencyInfoWindow extends StatelessWidget {
             ),
           ],
           const Spacer(),
-          const SearchDeaButton(
-            label: 'CALCULAR ROTA',
+          BlocBuilder<RoutingCubit, RoutingState>(
+            builder: (context, state) {
+              return SearchDeaButton(
+                label: 'CALCULAR ROTA',
+                onPress: onCalculateRoute,
+                isLoading: state is LoadingRouteState,
+              );
+            },
           ),
         ],
       ),

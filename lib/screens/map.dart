@@ -59,10 +59,12 @@ class _MapScreenState extends State<MapScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
-                RouteMethodWidget(),
-                SizedBox(height: 18.0),
-                SearchDeaButton(),
+              children: [
+                const RouteMethodWidget(),
+                const SizedBox(height: 18.0),
+                SearchDeaButton(
+                  onPress: () {},
+                ),
               ],
             ),
           ),

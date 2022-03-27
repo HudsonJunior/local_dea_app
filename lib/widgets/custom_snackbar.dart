@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomSnackBar {
   static SnackBar snackbar(String message, bool success) => SnackBar(
         elevation: 5.0,
+        dismissDirection: DismissDirection.horizontal,
         backgroundColor: !success ? Colors.redAccent : Colors.greenAccent,
         content: Text(
           message,

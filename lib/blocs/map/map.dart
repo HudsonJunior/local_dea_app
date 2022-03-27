@@ -44,6 +44,30 @@ class MapCubit extends Cubit<MapState> {
     }
   }
 
+  void updateCurrentPosition() async {
+    if (state is! LoadedDataState) return;
+
+    try {
+      final currentPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation,
+      );
+
+      final stateAux = (state as LoadedDataState);
+      emit(
+        LoadedDataState(
+          coordenadas: LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude,
+          ),
+          markers: stateAux.markers,
+          models: stateAux.models,
+        ),
+      );
+    } catch (_) {
+      return;
+    }
+  }
+
   void loadMapData() async {
     emit(LoadingInitialPositionState());
 

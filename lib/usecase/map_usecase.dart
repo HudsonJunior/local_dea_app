@@ -17,7 +17,7 @@ class MapUseCase {
   Future<LatLng?> loadInitialPosition() async {
     try {
       final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        desiredAccuracy: LocationAccuracy.bestForNavigation,
       );
 
       return LatLng(
