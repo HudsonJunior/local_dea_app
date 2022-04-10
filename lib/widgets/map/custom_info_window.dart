@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:local_dea_app/blocs/routing/routing.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 
 import 'package:local_dea_app/models/emergency_service_model.dart';
 import 'package:local_dea_app/models/emergency_service_type.dart';
@@ -50,13 +50,14 @@ class EmergencyInfoWindow extends StatelessWidget {
           const SizedBox(height: 16.0),
           InfoWindowLabel(
             icon: Icons.location_pin,
-            label: '${model.rua}, ${model.numero}, ${model.bairro}',
+            label: '${model.rua}, ${model.numero ?? 'SN'}, ${model.bairro}',
           ),
           const SizedBox(height: 18),
           if (model.numContato?.isNotEmpty ?? false) ...[
             InfoWindowLabel(
               icon: Icons.contact_phone,
               label: model.numContato ?? '',
+              showButton: true,
             ),
             const SizedBox(height: 18),
           ],
@@ -88,6 +89,7 @@ class EmergencyInfoWindow extends StatelessWidget {
                 label: 'CALCULAR ROTA',
                 onPress: onCalculateRoute,
                 isLoading: state is LoadingRouteState,
+                icon: Icons.location_pin,
               );
             },
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 
 import 'package:local_dea_app/widgets/map/route_info_item.dart';
 
@@ -72,7 +72,7 @@ extension RouteInfoExt on int {
     if (this >= 1000) {
       final converted = this ~/ 1000;
       final resto = this % 1000;
-      return '$converted km ${resto > 0 ? 'e $resto m' : ''}';
+      return '$converted${',${resto.toString().characters.elementAt(0)} km'}';
     } else {
       return '$this m';
     }
@@ -81,6 +81,6 @@ extension RouteInfoExt on int {
   String get formatDuration {
     final converted = this ~/ 60;
     final resto = this % 60;
-    return '${converted.toString().padLeft(2, '0')}:${resto.toString().padLeft(2, '0')}h';
+    return '${converted.toString().padLeft(2, '0')}h:${resto.toString().padLeft(2, '0')}m';
   }
 }

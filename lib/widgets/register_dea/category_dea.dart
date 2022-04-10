@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/constraints/colors.dart';
-
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/models/emergency_service_type.dart';
 
 class CategoryDeaSelector extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   final IconData icon;
@@ -10,6 +10,9 @@ class CustomFormField extends StatelessWidget {
   final bool isRequired;
   final ValueGetter<String?>? validator;
   final List<MaskTextInputFormatter>? formatters;
+  final bool obscureText;
+  final IconData? suffixIcon;
+  final VoidCallback? onTapSuffixIcon;
 
   const CustomFormField({
     Key? key,
@@ -18,6 +21,9 @@ class CustomFormField extends StatelessWidget {
     required this.controller,
     this.isRequired = true,
     this.keyboardType,
+    this.suffixIcon,
+    this.onTapSuffixIcon,
+    this.obscureText = false,
     this.validator,
     this.formatters,
   }) : super(key: key);
@@ -44,12 +50,19 @@ class CustomFormField extends StatelessWidget {
         TextFormField(
           keyboardType: keyboardType,
           inputFormatters: formatters,
+          obscureText: obscureText,
           style: const TextStyle(
             color: Palette.primary,
             fontWeight: FontWeight.w700,
           ),
           controller: controller,
           decoration: InputDecoration(
+            suffixIcon: suffixIcon != null
+                ? IconButton(
+                    icon: Icon(suffixIcon, color: Palette.primary),
+                    onPressed: onTapSuffixIcon,
+                  )
+                : const SizedBox.shrink(),
             fillColor: Colors.grey[200],
             filled: true,
             errorStyle: const TextStyle(color: Colors.white),

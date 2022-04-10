@@ -19,8 +19,12 @@ class ContactTextWidget extends StatelessWidget {
           color: Colors.white,
         ),
         const SizedBox(width: 8.0),
-        Text(
+        SelectableText(
           text,
+          toolbarOptions: const ToolbarOptions(
+            copy: true,
+            selectAll: true,
+          ),
           textAlign: TextAlign.start,
           style: const TextStyle(
             color: Colors.white,

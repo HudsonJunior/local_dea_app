@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 
 class CarouselIndicatorWidget extends StatelessWidget {
   const CarouselIndicatorWidget({

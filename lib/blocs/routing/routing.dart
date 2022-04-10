@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/models/calculated_route_nodel.dart';
+import 'package:local_dea_app/models/emergency_service_model.dart';
 import 'package:local_dea_app/models/route_method_model.dart';
 import 'package:local_dea_app/usecase/routing_usecase.dart';
 
@@ -18,7 +19,7 @@ class RoutingCubit extends Cubit<RoutingState> {
     required RouteMethodEnum transport,
   }) async {
     try {
-      emit(LoadingRouteState());
+      if (state is! LoadingRouteState) emit(LoadingRouteState());
 
       final response = await routingUseCase.calculateRoute(
         destiny: destiny,
@@ -37,5 +38,23 @@ class RoutingCubit extends Cubit<RoutingState> {
 
   void cleanRoute() {
     emit(IdleRouteState());
+  }
+
+  void loadMatrixRoute({
+    required Iterable<EmergencyServiceModel> models,
+    required RouteMethodEnum transport,
+  }) async {
+    emit(LoadingRouteState());
+
+    final response = await routingUseCase.calculateMatrix(
+      models: models,
+      transport: transport,
+    );
+
+    if (response == null) {
+      return emit(FailLoadedRouteState());
+    }
+
+    emit(CalculatedMatrixState(destiny: response));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_dea_app/blocs/register_dea/register_dea.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/models/emergency_service_type.dart';
 import 'package:local_dea_app/widgets/app_bar_content.dart';
 import 'package:local_dea_app/widgets/custom_snackbar.dart';
@@ -49,6 +49,8 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
 
   @override
   void initState() {
+    super.initState();
+
     registerDeaCubit = BlocProvider.of<RegisterDeaCubit>(context);
     nameController = TextEditingController();
     streetController = TextEditingController();
@@ -56,7 +58,6 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
     complementController = TextEditingController();
     contactNumberController = TextEditingController();
     descriptionController = TextEditingController();
-    super.initState();
   }
 
   void _onSelectedDeaCategory(EmergencyServiceType? type) {

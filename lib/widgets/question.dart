@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 
 class QuestionWidget extends StatelessWidget {
   final bool isSelected;
@@ -72,9 +72,9 @@ class QuestionWidget extends StatelessWidget {
             ),
           ),
           AnimatedCrossFade(
-            duration: const Duration(milliseconds: 250),
-            firstCurve: Curves.bounceIn,
-            secondCurve: Curves.bounceIn,
+            duration: const Duration(milliseconds: 350),
+            firstCurve: Curves.elasticIn,
+            secondCurve: Curves.elasticOut,
             crossFadeState: isSelected
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,
@@ -96,13 +96,28 @@ class QuestionWidget extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    answer,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      height: 1.2,
-                      fontSize: 18,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                          color: Palette.primary,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        answer,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          height: 1.2,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

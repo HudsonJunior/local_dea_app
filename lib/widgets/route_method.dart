@@ -35,7 +35,7 @@ class _RouteMethodWidgetState extends State<RouteMethodWidget> {
             children: [
               RouteMethodItem(
                 tip: 'Buscar DEA a pé',
-                icon: FontAwesomeIcons.walking,
+                icon: FontAwesomeIcons.personWalking,
                 isSelected: method == RouteMethodEnum.pedestrian,
                 onTap: () => routeMethodCubit
                     .selectRouteMethod(RouteMethodEnum.pedestrian),

@@ -1,4 +1,4 @@
-enum EmergencyServiceType { dea, hospital, samu }
+enum EmergencyServiceType { dea, hospital, upa, samu }
 
 extension EmergencyServiceExt on EmergencyServiceType {
   int get value {
@@ -9,6 +9,8 @@ extension EmergencyServiceExt on EmergencyServiceType {
         return 1;
       case EmergencyServiceType.samu:
         return 2;
+      case EmergencyServiceType.upa:
+        return 3;
     }
   }
 
@@ -19,7 +21,9 @@ extension EmergencyServiceExt on EmergencyServiceType {
       case EmergencyServiceType.hospital:
         return 'Hospital';
       case EmergencyServiceType.samu:
-        return 'Samu';
+        return 'SAMU';
+      case EmergencyServiceType.upa:
+        return 'UPA';
     }
   }
 
@@ -30,6 +34,8 @@ extension EmergencyServiceExt on EmergencyServiceType {
       case EmergencyServiceType.hospital:
         return 'assets/edificio-hospitalar.png';
       case EmergencyServiceType.samu:
+        return 'assets/samu_icon.png';
+      case EmergencyServiceType.upa:
         return 'assets/samu_icon.png';
     }
   }
@@ -42,6 +48,8 @@ extension EmergencyServiceExt on EmergencyServiceType {
         return EmergencyServiceType.hospital;
       case 2:
         return EmergencyServiceType.samu;
+      case 3:
+        return EmergencyServiceType.upa;
       default:
         return EmergencyServiceType.dea;
     }

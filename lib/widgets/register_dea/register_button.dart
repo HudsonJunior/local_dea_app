@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/widgets/loading_widget.dart';
 
 class RegisterButton extends StatelessWidget {

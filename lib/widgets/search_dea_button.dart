@@ -7,11 +7,13 @@ class SearchDeaButton extends StatelessWidget {
     this.label,
     required this.onPress,
     this.isLoading = false,
+    required this.icon,
   }) : super(key: key);
 
   final String? label;
   final VoidCallback onPress;
   final bool isLoading;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +32,18 @@ class SearchDeaButton extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: isLoading
               ? const LoadingWidget(color: Colors.white)
-              : Text(
-                  label ?? 'BUSCAR DEA',
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                  ),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      label ?? 'BUSCAR DEA',
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
                 ),
         ),
       ),

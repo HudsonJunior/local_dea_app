@@ -40,7 +40,7 @@ class MapUseCase {
         'assets/samu_icon.png',
       );
       final deaIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(),
+        const ImageConfiguration(size: Size(50, 50)),
         'assets/dea_icon_marker.png',
       );
 

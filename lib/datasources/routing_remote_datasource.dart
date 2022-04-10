@@ -1,20 +1,25 @@
 import 'package:local_dea_app/models/calculated_route_nodel.dart';
+import 'package:local_dea_app/models/matrix_calculating_model.dart';
+import 'package:local_dea_app/models/route_method_model.dart';
 import 'package:local_dea_app/models/routing_calculate_model.dart';
 import 'package:local_dea_app/resources/api_response.dart';
+import 'package:local_dea_app/resources/matrix_api.dart';
 import 'package:local_dea_app/resources/route_api.dart';
 
 class RoutingRemoteDatasource {
-  final RouteApi api;
+  final RouteApi routingApi;
+  final MatrixApi matrixApi;
 
   RoutingRemoteDatasource({
-    required this.api,
+    required this.routingApi,
+    required this.matrixApi,
   });
 
   Future<ApiResponse<CalculatedRouteModel>> calculateRote(
     RoutingCalculateModel model,
   ) async {
     try {
-      final response = await api.dio.get(
+      final response = await routingApi.dio.get(
         '',
         queryParameters: {
           'apiKey': 'OsnlH0CA8kKzeK-087EU71JPE5_mG9bmI5umkNVaWLQ',
@@ -45,6 +50,39 @@ class RoutingRemoteDatasource {
       return FailApiResponse(
         error: 'Não foi possível obter a localização especificada.',
       );
+    }
+  }
+
+  Future<ApiResponse<List<int>>> calculateMatrix(
+    MatrixCalculatingModel model,
+  ) async {
+    try {
+      final response = await matrixApi.dio.post(
+        '',
+        data: {
+          "origins": [
+            {"lat": model.origin.latitude, "lng": model.origin.longitude}
+          ],
+          "destinations": model.destiny.toList(),
+          "regionDefinition": {"type": "world"},
+          "profile": model.transport == RouteMethodEnum.car
+              ? "carFast"
+              : model.transport.name,
+          "matrixAttributes": ["distances"],
+        },
+        queryParameters: {
+          "async": false,
+          'apiKey': 'OsnlH0CA8kKzeK-087EU71JPE5_mG9bmI5umkNVaWLQ',
+        },
+      );
+      final results = response.data["matrix"]["distances"];
+
+      if (results != null && results.length > 0) {
+        return SuccessApiResponse(data: List<int>.from(results));
+      }
+      return FailApiResponse(error: 'Não foi possível calcular a menor rota.');
+    } catch (_) {
+      return FailApiResponse(error: 'Não foi possível calcular a menor rota.');
     }
   }
 }

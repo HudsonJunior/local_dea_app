@@ -15,3 +15,11 @@ class LoadedRouteState extends RoutingState {
 }
 
 class FailLoadedRouteState extends RoutingState {}
+
+class CalculatedMatrixState extends RoutingState {
+  final LatLng destiny;
+
+  CalculatedMatrixState({
+    required this.destiny,
+  });
+}

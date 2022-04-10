@@ -18,7 +18,7 @@ class EmergencyServiceModel {
 
   final String nome;
   final String rua;
-  final int numero;
+  final int? numero;
   final String? bairro;
   final String? horarioAbertura;
   final String? horarioFechamento;
@@ -54,7 +54,7 @@ class EmergencyServiceModel {
     return EmergencyServiceModel(
       nome: map['nome'] ?? '',
       rua: map['rua'] ?? '',
-      numero: map['numero']?.toInt() ?? 0,
+      numero: map['numero']?.toInt(),
       bairro: map['bairro'] ?? '',
       horarioAbertura: map['inicio'] ?? '',
       horarioFechamento: map['fim'] ?? '',

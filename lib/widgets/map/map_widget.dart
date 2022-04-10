@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/blocs/map/map.dart';
 import 'package:local_dea_app/blocs/route_method_cubit.dart';
 import 'package:local_dea_app/blocs/routing/routing.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/models/marker_model.dart';
 import 'package:local_dea_app/widgets/custom_snackbar.dart';
 import 'package:local_dea_app/widgets/loading_widget.dart';
@@ -19,7 +19,8 @@ class MapWidget extends StatefulWidget {
   _MapWidgetState createState() => _MapWidgetState();
 }
 
-class _MapWidgetState extends State<MapWidget> {
+class _MapWidgetState extends State<MapWidget>
+    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
   late final MapCubit mapCubit;
   late final RoutingCubit routingCubit;
   late final RouteMethodCubit routeMethodCubit;
@@ -32,11 +33,20 @@ class _MapWidgetState extends State<MapWidget> {
     mapCubit = BlocProvider.of<MapCubit>(context)..validateLocationPermission();
     routingCubit = BlocProvider.of<RoutingCubit>(context);
     routeMethodCubit = BlocProvider.of<RouteMethodCubit>(context);
+    WidgetsBinding.instance!.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _controller.setMapStyle('[]');
+    }
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 
@@ -49,7 +59,9 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocConsumer<MapCubit, MapState>(
+      bloc: mapCubit,
       listenWhen: (_, curr) =>
           curr is PermissionGrantedState || curr is LoadedDataState,
       listener: (context, state) async {
@@ -59,18 +71,24 @@ class _MapWidgetState extends State<MapWidget> {
       },
       builder: (context, mapState) {
         if (mapState is LoadingInitialPositionState) {
-          return const LoadingWidget();
+          return const Center(child: LoadingWidget());
         }
         if (mapState is LoadedDataState) {
           return BlocConsumer<RoutingCubit, RoutingState>(
+            bloc: routingCubit,
             listenWhen: (_, curr) => curr is! LoadingRouteState,
             listener: (context, state) async {
               if (state is FailLoadedRouteState) {
-                Navigator.of(context).pop();
                 CustomSnackBar.show(
                   context,
                   'Falha ao calcular rota. Tente novamente',
                   success: false,
+                );
+              }
+              if (state is CalculatedMatrixState) {
+                routingCubit.loadRoute(
+                  destiny: state.destiny,
+                  transport: routeMethodCubit.state,
                 );
               }
               if (state is LoadedRouteState) {
@@ -78,14 +96,13 @@ class _MapWidgetState extends State<MapWidget> {
                   CameraUpdate.newCameraPosition(
                     CameraPosition(
                       target: mapState.coordenadas,
-                      zoom: 20.0,
+                      zoom: 17.0,
                     ),
                   ),
                 );
-                Navigator.of(context).pop();
+                if (Navigator.of(context).canPop()) Navigator.of(context).pop();
               }
             },
-            buildWhen: (_, state) => state is! LoadingRouteState,
             builder: (context, routeState) => Stack(
               children: [
                 GoogleMap(
@@ -184,4 +201,7 @@ class _MapWidgetState extends State<MapWidget> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

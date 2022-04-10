@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/widgets/app_bar_content.dart';
 import 'package:local_dea_app/widgets/dea_guide/carousel_indicator.dart';
 
@@ -52,7 +52,7 @@ class _DeaGuideScreenState extends State<DeaGuideScreen> {
                   _controller.previousPage();
                 },
                 icon: const Icon(
-                  FontAwesomeIcons.arrowCircleUp,
+                  FontAwesomeIcons.circleArrowUp,
                   color: Palette.primary,
                   size: 30,
                 ),
@@ -92,7 +92,7 @@ class _DeaGuideScreenState extends State<DeaGuideScreen> {
                   _controller.nextPage();
                 },
                 icon: const Icon(
-                  FontAwesomeIcons.arrowCircleDown,
+                  FontAwesomeIcons.circleArrowDown,
                   color: Palette.primary,
                   size: 30,
                 ),

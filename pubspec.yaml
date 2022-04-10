@@ -15,6 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_launcher_icons: ^0.9.2
   font_awesome_flutter: ^10.1.0
   geocoding: ^2.0.4
   geolocator: ^8.2.0
@@ -22,13 +23,18 @@ dependencies:
   intl: ^0.17.0
   location: ^4.3.0
   mask_text_input_formatter: ^2.1.0
-  url_launcher: ^6.0.20
   tuple: ^2.0.0
-  
+  url_launcher: ^6.0.20
+
 dev_dependencies:
   flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: "launcher_icon"
+  image_path: "assets/dea_icon.png"
 
 flutter:
   uses-material-design: true

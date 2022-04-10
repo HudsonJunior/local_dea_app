@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/constraints/colors.dart';
+import 'package:local_dea_app/blocs/auth/auth.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/resources/launcher_service.dart';
 import 'package:local_dea_app/screens/about.dart';
+import 'package:local_dea_app/screens/auth.dart';
 import 'package:local_dea_app/screens/dea_guide.dart';
 import 'package:local_dea_app/screens/frequently_questions.dart';
 import 'package:local_dea_app/screens/register_dea.dart';
@@ -36,11 +39,19 @@ class _MenuScreenState extends State<MenuScreen> {
             const SizedBox(height: 24.0),
             MenuCard(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const RegisterDeaScreen(),
-                  ),
-                );
+                if (context.read<AuthBloc>().state is! AuthSucceedState) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const AuthScreen(),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const RegisterDeaScreen(),
+                    ),
+                  );
+                }
               },
               icon: Icons.location_on,
               title: 'Cadastrar Serviço',
@@ -54,7 +65,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 );
               },
-              icon: FontAwesomeIcons.solidQuestionCircle,
+              icon: FontAwesomeIcons.solidCircleQuestion,
               title: 'Perguntas frequentes',
             ),
             const SizedBox(height: 12.0),
@@ -67,7 +78,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 );
               },
               icon: FontAwesomeIcons.bookMedical,
-              title: 'Guia de Reanimação Cardiopulmonar',
+              title: 'Guia de RCP',
             ),
             const SizedBox(height: 12.0),
             MenuCard(
@@ -78,7 +89,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 );
               },
-              icon: FontAwesomeIcons.infoCircle,
+              icon: FontAwesomeIcons.circleInfo,
               title: 'Sobre',
             ),
             const SizedBox(height: 12.0),
