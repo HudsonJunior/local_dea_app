@@ -11,19 +11,22 @@ class LoginModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'user': user,
-      'password': password,
+      'placa': user,
+      'senha': password,
     };
   }
 
   factory LoginModel.fromMap(Map<String, dynamic> map) {
     return LoginModel(
-      user: map['user'] ?? '',
-      password: map['password'] ?? '',
+      user: map['placa'] ?? '',
+      password: map['senha'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
+
+  factory LoginModel.withHash(LoginModel model, String hash) =>
+      LoginModel(user: model.user, password: hash);
 
   factory LoginModel.fromJson(String source) =>
       LoginModel.fromMap(json.decode(source));

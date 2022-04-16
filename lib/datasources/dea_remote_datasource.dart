@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:local_dea_app/models/emergency_service_model.dart';
-import 'package:local_dea_app/resources/search_api.dart';
 import 'package:local_dea_app/resources/api_response.dart';
+import 'package:local_dea_app/resources/siga_api.dart';
 
 class DeaRemoteDatasource {
-  final SearchApi api;
+  final SigaApi api;
 
   DeaRemoteDatasource({
     required this.api,
@@ -154,28 +154,36 @@ class DeaRemoteDatasource {
       'isPrivado': false,
     },
     {
-      'nome': 'SAMU - BASE SUL',
-      'rua': 'Rua Pioneiro Antônio Paulo da Silva',
-      'numero': null,
-      'bairro': 'Parque da Gavea',
-      'latitude': -23.451700201213956,
-      'longitude': -51.92441835397782,
-      'descricao': 'Estação do SAMU.',
-      'categoria': 2,
-      'contato': '(44) 3218-6250',
-      'isPrivado': false,
+      "nome": "SAMU - BASE SUL",
+      "rua": "Rua Pioneiro Antônio Paulo da Silva",
+      "numero": null,
+      "bairro": "Parque da Gavea",
+      "latitude": -23.451700201213956,
+      "longitude": -51.92441835397782,
+      "descricao": "Estação do SAMU.",
+      "categoria": 2,
+      "contato": "(44) 3218-6250",
+      "isPrivado": false,
     },
   ];
 
   Future<ApiResponse<Iterable<EmergencyServiceModel>>> getDeas() async {
     try {
-      // final response = await _dio.get('mobile/local_dea');
-      // final data = response.data;
+      final response = await api.dio.get('/mobile/local_dea');
 
+      if (response.statusCode == 200 && response.data?.length > 0) {
+        return SuccessApiResponse(
+          data: EmergencyServiceModel.fromJsonList(response.data),
+        );
+      } else {
+        return SuccessApiResponse(
+          data: EmergencyServiceModel.fromJsonList(deaDataMock),
+        );
+      }
+    } on DioError catch (error) {
       return SuccessApiResponse(
         data: EmergencyServiceModel.fromJsonList(deaDataMock),
       );
-    } on DioError catch (error) {
       return FailApiResponse(error: error.message);
     }
   }
@@ -183,7 +191,7 @@ class DeaRemoteDatasource {
   Future<ApiResponse<bool>> createDea(EmergencyServiceModel model) async {
     try {
       await api.dio.post(
-        'mobile/local_dea',
+        '/mobile/local_dea',
         data: model.toJson(),
       );
 

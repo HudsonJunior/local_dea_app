@@ -8,9 +8,7 @@ class AuthLoginDataSource {
 
   Future<bool> login(Map<String, dynamic> data) async {
     try {
-      await Future.delayed(const Duration(seconds: 3));
-      return true;
-      final response = await api.dio.post('/login', data: data);
+      final response = await api.dio.post('/mobile/login', data: data);
       if (response.statusCode == 200) {
         return true;
       }
