@@ -2,8 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:local_dea_app/definitions/colors.dart';
-import 'package:local_dea_app/widgets/app_bar_content.dart';
+import 'package:local_dea_app/widgets/custom_appbar.dart';
 import 'package:local_dea_app/widgets/dea_guide/carousel_indicator.dart';
+import 'package:local_dea_app/widgets/dea_guide/guide_step1.dart';
+import 'package:local_dea_app/widgets/dea_guide/guide_step2.dart';
+import 'package:local_dea_app/widgets/dea_guide/guide_step3.dart';
+import 'package:local_dea_app/widgets/dea_guide/guide_step4.dart';
 
 class DeaGuideScreen extends StatefulWidget {
   const DeaGuideScreen({Key? key}) : super(key: key);
@@ -13,21 +17,12 @@ class DeaGuideScreen extends StatefulWidget {
 }
 
 class _DeaGuideScreenState extends State<DeaGuideScreen> {
-  final pages = <Image>[
-    Image.asset('assets/Fluxo1.png'),
-    Image.asset('assets/Fluxo2.png'),
-    Image.asset('assets/Fluxo3.png'),
-    Image.asset('assets/Fluxo4.png'),
-    Image.asset('assets/Fluxo5.png'),
-    Image.asset('assets/Fluxo6.png'),
+  final _items = <Widget>[
+    const GuideStep1(),
+    const GuideStep2(),
+    const GuideStep3(),
+    const GuideStep4(),
   ];
-
-  Widget buildItem(Image page) {
-    return RotatedBox(
-      child: page,
-      quarterTurns: 1,
-    );
-  }
 
   int _currentPage = 0;
   final CarouselController _controller = CarouselController();
@@ -36,66 +31,73 @@ class _DeaGuideScreenState extends State<DeaGuideScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          foregroundColor: Colors.white,
-          backgroundColor: Palette.primary,
-          title: const AppBarContent(
-            title: 'Guia prático',
-          ),
-        ),
+        appBar: const CustomAppBar(),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () {
-                  _controller.previousPage();
-                },
-                icon: const Icon(
-                  FontAwesomeIcons.circleArrowUp,
-                  color: Palette.primary,
-                  size: 30,
+              Expanded(
+                child: CarouselSlider(
+                  carouselController: _controller,
+                  items: _items.map((item) => item).toList(),
+                  options: CarouselOptions(
+                    height: MediaQuery.of(context).size.height,
+                    enlargeCenterPage: true,
+                    viewportFraction: 1.0,
+                    onPageChanged: (index, _) {
+                      setState(() {
+                        _currentPage = index;
+                      });
+                    },
+                  ),
                 ),
               ),
-              Expanded(
-                child: Row(
-                  children: [
-                    CarouselIndicatorWidget(
-                      pagesCount: pages.length,
-                      currentPage: _currentPage,
-                      onChangePage: (index) {
-                        _controller.animateToPage(index);
+              const Divider(
+                color: Palette.primary,
+                thickness: 1.5,
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: IconButton(
+                      iconSize: 50,
+                      onPressed: () {
+                        _controller.previousPage();
                       },
-                    ),
-                    Expanded(
-                      child: CarouselSlider(
-                        carouselController: _controller,
-                        items: pages.map((page) => buildItem(page)).toList(),
-                        options: CarouselOptions(
-                          height: MediaQuery.of(context).size.height,
-                          enlargeCenterPage: true,
-                          scrollDirection: Axis.vertical,
-                          viewportFraction: 1.0,
-                          onPageChanged: (index, _) {
-                            setState(() {
-                              _currentPage = index;
-                            });
-                          },
-                        ),
+                      splashColor: Palette.primary.withOpacity(0.3),
+                      icon: const Icon(
+                        FontAwesomeIcons.circleArrowLeft,
+                        color: Palette.primary,
                       ),
                     ),
-                  ],
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  _controller.nextPage();
-                },
-                icon: const Icon(
-                  FontAwesomeIcons.circleArrowDown,
-                  color: Palette.primary,
-                  size: 30,
-                ),
+                  ),
+                  CarouselIndicatorWidget(
+                    pagesCount: _items.length,
+                    currentPage: _currentPage,
+                    onChangePage: (index) {
+                      _controller.animateToPage(index);
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: IconButton(
+                      iconSize: 50,
+                      splashColor: Palette.primary.withOpacity(0.3),
+                      onPressed: () {
+                        _controller.nextPage();
+                      },
+                      icon: const Icon(
+                        FontAwesomeIcons.circleArrowRight,
+                        color: Palette.primary,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

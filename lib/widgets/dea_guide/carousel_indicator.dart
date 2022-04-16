@@ -15,7 +15,7 @@ class CarouselIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           pagesCount,

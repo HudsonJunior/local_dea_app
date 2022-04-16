@@ -44,9 +44,7 @@ flutter:
     - assets/dea_icon_marker.png
     - assets/edificio-hospitalar.png
     - assets/samu_icon.png
-    - assets/Fluxo1.png
-    - assets/Fluxo2.png
-    - assets/Fluxo3.png
-    - assets/Fluxo4.png
-    - assets/Fluxo5.png
-    - assets/Fluxo6.png
+    - assets/step1.png
+    - assets/step2.png
+    - assets/step3.png
+    - assets/step4.png
