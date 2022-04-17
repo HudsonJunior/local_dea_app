@@ -17,10 +17,26 @@ class RouteMethodWidget extends StatefulWidget {
 class _RouteMethodWidgetState extends State<RouteMethodWidget> {
   late final RouteMethodCubit routeMethodCubit;
 
+  late Widget centerWidget;
   @override
   void initState() {
     super.initState();
     routeMethodCubit = BlocProvider.of<RouteMethodCubit>(context);
+  }
+
+  List<RouteMethodEnum> items = <RouteMethodEnum>[
+    RouteMethodEnum.car,
+    RouteMethodEnum.bicycle,
+    RouteMethodEnum.pedestrian
+  ];
+
+  void onChangeItems(int currentIndex) async {
+    final aux = items[1];
+
+    setState(() {
+      items[1] = items[currentIndex];
+      items[currentIndex] = aux;
+    });
   }
 
   @override
@@ -28,33 +44,69 @@ class _RouteMethodWidgetState extends State<RouteMethodWidget> {
     return BlocBuilder<RouteMethodCubit, RouteMethodEnum>(
         bloc: routeMethodCubit,
         builder: (context, method) {
-          return Wrap(
-            direction: Axis.horizontal,
-            runSpacing: 8.0,
-            spacing: 48.0,
-            children: [
-              RouteMethodItem(
-                tip: 'Buscar DEA a pé',
-                icon: FontAwesomeIcons.personWalking,
-                isSelected: method == RouteMethodEnum.pedestrian,
-                onTap: () => routeMethodCubit
-                    .selectRouteMethod(RouteMethodEnum.pedestrian),
-              ),
-              RouteMethodItem(
-                tip: 'Buscar DEA de bicicleta',
-                icon: FontAwesomeIcons.bicycle,
-                onTap: () =>
-                    routeMethodCubit.selectRouteMethod(RouteMethodEnum.bicycle),
-                isSelected: method == RouteMethodEnum.bicycle,
-              ),
-              RouteMethodItem(
+          final itemsWidget = items.map((mapMethod) {
+            if (mapMethod == RouteMethodEnum.car) {
+              return RouteMethodItem(
+                key: Key(mapMethod.name),
+                turns: method == RouteMethodEnum.car ? 1 : 0,
                 tip: 'Buscar DEA de carro',
                 isSelected: method == RouteMethodEnum.car,
                 icon: FontAwesomeIcons.car,
-                onTap: () =>
-                    routeMethodCubit.selectRouteMethod(RouteMethodEnum.car),
-              ),
-            ],
+                onTap: () {
+                  if (method != RouteMethodEnum.car) {
+                    routeMethodCubit.selectRouteMethod(RouteMethodEnum.car);
+                    onChangeItems(
+                      items.indexOf(RouteMethodEnum.car),
+                    );
+                  }
+                },
+              );
+            }
+            if (mapMethod == RouteMethodEnum.bicycle) {
+              return RouteMethodItem(
+                key: Key(mapMethod.name),
+                turns: method == RouteMethodEnum.bicycle ? 1 : 0,
+                tip: 'Buscar DEA de bicicleta',
+                icon: FontAwesomeIcons.bicycle,
+                onTap: () {
+                  if (method != RouteMethodEnum.bicycle) {
+                    routeMethodCubit.selectRouteMethod(RouteMethodEnum.bicycle);
+                    onChangeItems(
+                      items.indexOf(RouteMethodEnum.bicycle),
+                    );
+                  }
+                },
+                isSelected: method == RouteMethodEnum.bicycle,
+              );
+            }
+            if (mapMethod == RouteMethodEnum.pedestrian) {
+              return RouteMethodItem(
+                key: Key(mapMethod.name),
+                tip: 'Buscar DEA a pé',
+                turns: method == RouteMethodEnum.pedestrian ? 1 : 0,
+                icon: FontAwesomeIcons.personWalking,
+                isSelected: method == RouteMethodEnum.pedestrian,
+                onTap: () {
+                  if (method != RouteMethodEnum.pedestrian) {
+                    routeMethodCubit
+                        .selectRouteMethod(RouteMethodEnum.pedestrian);
+                    onChangeItems(
+                      items.indexOf(RouteMethodEnum.pedestrian),
+                    );
+                  }
+                },
+              );
+            }
+
+            return const SizedBox.shrink();
+          }).toList();
+
+          return Wrap(
+            direction: Axis.horizontal,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 8.0,
+            spacing: 48.0,
+            children: itemsWidget,
           );
         });
   }

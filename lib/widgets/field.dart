@@ -5,6 +5,7 @@ import 'package:local_dea_app/definitions/colors.dart';
 class CustomFormField extends StatelessWidget {
   final IconData icon;
   final String label;
+  final String? hintText;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final bool isRequired;
@@ -22,6 +23,7 @@ class CustomFormField extends StatelessWidget {
     this.isRequired = true,
     this.keyboardType,
     this.suffixIcon,
+    this.hintText,
     this.onTapSuffixIcon,
     this.obscureText = false,
     this.validator,
@@ -32,20 +34,21 @@ class CustomFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              label,
-              textAlign: TextAlign.start,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+        if (label.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                label,
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-        ),
         const SizedBox(height: 4.0),
         TextFormField(
           keyboardType: keyboardType,
@@ -57,6 +60,8 @@ class CustomFormField extends StatelessWidget {
           ),
           controller: controller,
           decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: const TextStyle(color: Palette.primary),
             suffixIcon: suffixIcon != null
                 ? IconButton(
                     icon: Icon(suffixIcon, color: Palette.primary),

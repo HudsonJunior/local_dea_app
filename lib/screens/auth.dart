@@ -9,6 +9,7 @@ import 'package:local_dea_app/widgets/app_bar_content.dart';
 import 'package:local_dea_app/widgets/custom_snackbar.dart';
 import 'package:local_dea_app/widgets/field.dart';
 import 'package:local_dea_app/widgets/search_dea_button.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -57,8 +58,10 @@ class _AuthScreenState extends State<AuthScreen> {
           if (state is AuthSucceedState) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (_) => const RegisterDeaScreen(),
+              PageTransition(
+                type: PageTransitionType.scale,
+                alignment: Alignment.center,
+                child: const RegisterDeaScreen(),
               ),
             );
           }

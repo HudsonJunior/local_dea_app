@@ -37,6 +37,10 @@ class _MapScreenState extends State<MapScreen>
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
+        endDrawer: const Drawer(
+          backgroundColor: Palette.primary,
+          child: MenuWidget(),
+        ),
         appBar: AppBar(
           backgroundColor: Palette.primary,
           title: Row(
@@ -53,24 +57,6 @@ class _MapScreenState extends State<MapScreen>
               ),
             ],
           ),
-          actions: [
-            Flexible(
-              child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const MenuScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.menu,
-                  size: 35,
-                ),
-              ),
-            ),
-            const SizedBox(width: 16.0),
-          ],
         ),
         body: Stack(
           children: [

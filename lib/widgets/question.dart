@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:local_dea_app/definitions/colors.dart';
 
@@ -21,6 +22,7 @@ class QuestionWidget extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
+          const SizedBox(height: 8),
           Tooltip(
             textStyle: const TextStyle(
               fontSize: 18.0,
@@ -99,14 +101,23 @@ class QuestionWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                          color: Palette.primary,
-                          fontSize: 18,
-                        ),
+                      AnimatedTextKit(
+                        animatedTexts: [
+                          TyperAnimatedText(
+                            title,
+                            speed: const Duration(milliseconds: 50),
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              height: 1.2,
+                              color: Palette.primary,
+                              fontSize: 18,
+                            ),
+                          )
+                        ],
+                        totalRepeatCount: 2,
+                        pause: const Duration(milliseconds: 200),
+                        displayFullTextOnTap: true,
+                        stopPauseOnTap: true,
                       ),
                       const SizedBox(height: 8.0),
                       Text(
