@@ -54,7 +54,7 @@ class _AboutScreenState extends State<AboutScreen> {
             physics: const BouncingScrollPhysics(),
             children: [
               const Text(
-                'O aplicativo DEA foi desenvolvido nos projetos de TCC e PIBITI, por Hudon Junior e Giovanna Eiri, respectivamente, discentes dos curso de Ciência da Computação e Medicina da Universidade Estadual de Maringá.',
+                'O aplicativo DEA foi desenvolvido nos projetos de TCC e PIBITI, por Hudson Junior e Giovanna Eiri, respectivamente, discentes dos curso de Ciência da Computação e Medicina da Universidade Estadual de Maringá.',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: Colors.white,

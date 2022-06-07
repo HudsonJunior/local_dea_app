@@ -66,24 +66,25 @@ class _MapScreenState extends State<MapScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const RouteMethodWidget(),
-                  const SizedBox(height: 18.0),
+                  const Flexible(child: RouteMethodWidget()),
                   BlocBuilder<RoutingCubit, RoutingState>(
                     bloc: routingCubit,
                     builder: (context, state) {
-                      return LocalDeaButton(
-                        onPress: () {
-                          routingCubit.loadMatrixRoute(
-                            models: mapCubit.state is LoadedDataState
-                                ? (mapCubit.state as LoadedDataState)
-                                    .models
-                                    .values
-                                : [],
-                            transport: routeMethodCubit.state,
-                          );
-                        },
-                        icon: Icons.search_outlined,
-                        isLoading: state is LoadingRouteState,
+                      return Flexible(
+                        child: LocalDeaButton(
+                          onPress: () {
+                            routingCubit.loadMatrixRoute(
+                              models: mapCubit.state is LoadedDataState
+                                  ? (mapCubit.state as LoadedDataState)
+                                      .models
+                                      .values
+                                  : [],
+                              transport: routeMethodCubit.state,
+                            );
+                          },
+                          icon: Icons.search_outlined,
+                          isLoading: state is LoadingRouteState,
+                        ),
                       );
                     },
                   ),

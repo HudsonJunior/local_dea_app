@@ -7,7 +7,7 @@ class RouteMethodItem extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
   final bool isSelected;
-  final double turns;
+  final PageController pageController;
 
   const RouteMethodItem({
     Key? key,
@@ -15,32 +15,46 @@ class RouteMethodItem extends StatelessWidget {
     required this.icon,
     required this.onTap,
     required this.isSelected,
-    required this.turns,
+    required this.pageController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        AnimatedCrossFade(
-          duration: const Duration(milliseconds: 200),
-          firstChild: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                tip,
-                style: const TextStyle(color: Colors.white),
+        if (isSelected)
+          TweenAnimationBuilder(
+            tween: Tween<double>(begin: 0.0, end: 1.0),
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
+            builder: (context, double value, child) {
+              return Transform.scale(
+                scale: value,
+                child: child,
+              );
+            },
+            child: Flexible(
+              child: Card(
+                color: Palette.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
+                      tip,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
             ),
-            color: Palette.primary,
           ),
-          secondChild: const SizedBox.shrink(),
-          crossFadeState:
-              isSelected ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-        ),
-        AnimatedRotation(
-          duration: Duration(milliseconds: isSelected ? 1000 : 0),
-          turns: turns,
+        Flexible(
           child: Tooltip(
             message: tip,
             child: InkWell(
