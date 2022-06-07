@@ -7,7 +7,6 @@ class RouteMethodItem extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
   final bool isSelected;
-  final PageController pageController;
 
   const RouteMethodItem({
     Key? key,
@@ -15,7 +14,6 @@ class RouteMethodItem extends StatelessWidget {
     required this.icon,
     required this.onTap,
     required this.isSelected,
-    required this.pageController,
   }) : super(key: key);
 
   @override
@@ -35,20 +33,18 @@ class RouteMethodItem extends StatelessWidget {
                 child: child,
               );
             },
-            child: Flexible(
-              child: Card(
-                color: Palette.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      tip,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white),
-                    ),
+            child: Card(
+              color: Palette.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    tip,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),

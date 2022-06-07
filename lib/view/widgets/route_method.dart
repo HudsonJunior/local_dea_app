@@ -39,7 +39,6 @@ class _RouteMethodWidgetState extends State<RouteMethodWidget> {
             return RouteMethodItem(
               tip: item.tip,
               icon: item.icon,
-              pageController: pageController,
               onTap: () {
                 routeMethodCubit.selectRouteMethod(
                   item,
