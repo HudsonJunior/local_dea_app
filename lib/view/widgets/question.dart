@@ -1,6 +1,4 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 
 class QuestionWidget extends StatelessWidget {
   final bool isSelected;
@@ -18,124 +16,113 @@ class QuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        children: [
-          const SizedBox(height: 8),
-          Tooltip(
-            textStyle: const TextStyle(
-              fontSize: 18.0,
-              color: Palette.primary,
-              fontWeight: FontWeight.bold,
-            ),
-            padding: const EdgeInsets.all(12.0),
-            margin: const EdgeInsets.symmetric(horizontal: 12.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: Palette.primary,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: onTap,
+        child: Column(
+          children: [
+            const SizedBox(height: 8),
+            Tooltip(
+              textStyle: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
               ),
-            ),
-            message: title,
-            child: Card(
-              color: Colors.white,
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+              padding: const EdgeInsets.all(12.0),
+              margin: const EdgeInsets.symmetric(horizontal: 12.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 12.0),
-                    Expanded(
-                      flex: 4,
-                      child: Text(
-                        title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Palette.primary,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Palette.primary,
-                    ),
-                    const SizedBox(width: 12.0),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          AnimatedCrossFade(
-            duration: const Duration(milliseconds: 350),
-            firstCurve: Curves.elasticIn,
-            secondCurve: Curves.elasticOut,
-            crossFadeState: isSelected
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            firstChild: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 6.0,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black54,
-                      blurRadius: 4.0,
-                      offset: Offset(0.75, 0.0),
-                    )
-                  ],
+              message: title,
+              child: Card(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
                     children: [
-                      AnimatedTextKit(
-                        animatedTexts: [
-                          TyperAnimatedText(
-                            title,
-                            speed: const Duration(milliseconds: 50),
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              height: 1.2,
-                              color: Palette.primary,
-                              fontSize: 18,
-                            ),
-                          )
-                        ],
-                        totalRepeatCount: 2,
-                        pause: const Duration(milliseconds: 200),
-                        displayFullTextOnTap: true,
-                        stopPauseOnTap: true,
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        answer,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          height: 1.2,
-                          fontSize: 16,
+                      const SizedBox(width: 12.0),
+                      Expanded(
+                        flex: 4,
+                        child: Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black87,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        child: isSelected
+                            ? const Icon(
+                                Icons.keyboard_arrow_up,
+                                color: Colors.black87,
+                              )
+                            : const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.black87,
+                              ),
+                      ),
+                      const SizedBox(width: 12.0),
                     ],
                   ),
                 ),
               ),
             ),
-            secondChild: const SizedBox.shrink(),
-          ),
-        ],
+            AnimatedSlide(
+              offset: Offset(isSelected ? 0 : -2, 0),
+              duration: const Duration(
+                milliseconds: 400,
+              ),
+              curve: Curves.easeOut,
+              child: isSelected
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.2,
+                                  color: Colors.red,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                answer,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.2,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
       ),
     );
   }

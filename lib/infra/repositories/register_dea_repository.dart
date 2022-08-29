@@ -1,9 +1,9 @@
 import 'package:local_dea_app/domain/models/emergency_service_model.dart';
-import 'package:local_dea_app/infra/datasources/register_dea_remote_datasource.dart';
+import 'package:local_dea_app/infra/datasources/dea_remote_datasource.dart';
 import 'package:local_dea_app/infra/resources/api_response.dart';
 
 class RegisterDeaRepository {
-  final RegisterDeaRemoteDatasource registerDeaRemoteDatasource;
+  final DeaRemoteDatasource registerDeaRemoteDatasource;
 
   RegisterDeaRepository({
     required this.registerDeaRemoteDatasource,

@@ -37,19 +37,35 @@ class _MapScreenState extends State<MapScreen>
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
-        endDrawer: const Drawer(
-          backgroundColor: Palette.primary,
-          child: MenuWidget(),
+        endDrawer: Drawer(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Palette.redGradient1, Palette.redGradient2],
+              ),
+            ),
+            child: const MenuWidget(),
+          ),
         ),
         appBar: AppBar(
-          backgroundColor: Palette.primary,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[Colors.redAccent, Colors.red],
+              ),
+            ),
+          ),
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
                 'assets/dea_icon.png',
-                width: 40,
-                height: 40,
+                width: 60,
+                height: 60,
               ),
               const SizedBox(width: 8.0),
               const Text(
@@ -67,6 +83,7 @@ class _MapScreenState extends State<MapScreen>
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Flexible(child: RouteMethodWidget()),
+                  const SizedBox(height: 16),
                   BlocBuilder<RoutingCubit, RoutingState>(
                     bloc: routingCubit,
                     builder: (context, state) {

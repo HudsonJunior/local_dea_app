@@ -28,7 +28,7 @@ class _RouteMethodWidgetState extends State<RouteMethodWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: MediaQuery.of(context).size.height * 0.15,
       child: BlocBuilder<RouteMethodCubit, RouteMethodEnum>(
           builder: (context, method) {
         return PageView.builder(

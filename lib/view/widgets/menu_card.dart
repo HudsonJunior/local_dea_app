@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 
 class MenuCard extends StatelessWidget {
   final VoidCallback onTap;
@@ -19,19 +18,26 @@ class MenuCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        elevation: 8.0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            12.0,
-          ),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              FaIcon(
-                icon,
-                color: Palette.primary,
+              ShaderMask(
+                shaderCallback: (bounds) {
+                  return const LinearGradient(
+                    colors: [Colors.black54, Colors.black87],
+                  ).createShader(
+                    bounds,
+                  );
+                },
+                child: FaIcon(
+                  icon,
+                  color: Colors.black,
+                  size: 20,
+                ),
               ),
               const SizedBox(width: 18.0),
               Expanded(
@@ -40,9 +46,9 @@ class MenuCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    color: Palette.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
                   ),
                 ),
               ),

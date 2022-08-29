@@ -21,6 +21,7 @@ class RouteMethodItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (isSelected)
           TweenAnimationBuilder(
@@ -34,7 +35,7 @@ class RouteMethodItem extends StatelessWidget {
               );
             },
             child: Card(
-              color: Palette.primary,
+              color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -44,7 +45,10 @@ class RouteMethodItem extends StatelessWidget {
                   child: Text(
                     tip,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
                 ),
               ),
@@ -59,22 +63,25 @@ class RouteMethodItem extends StatelessWidget {
                 width: isSelected ? 55 : 45,
                 height: isSelected ? 55 : 45,
                 decoration: const BoxDecoration(
-                  color: Palette.primary,
                   shape: BoxShape.circle,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Palette.secondary,
-                      shape: BoxShape.circle,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Palette.redGradient1,
+                        Palette.redGradient2,
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                    child: Center(
-                      child: FaIcon(
-                        icon,
-                        size: isSelected ? 30 : 22,
-                        color: isSelected ? Palette.primary : null,
-                      ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: FaIcon(
+                      icon,
+                      size: isSelected ? 30 : 22,
+                      color: Colors.white,
                     ),
                   ),
                 ),

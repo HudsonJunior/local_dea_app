@@ -52,21 +52,24 @@ class _FrequentlyQuestionsScreenState extends State<FrequentlyQuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.primary,
-      body: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-                foregroundColor: Colors.white,
-                floating: true,
-                snap: true,
-                expandedHeight: kTextTabBarHeight * 2 + 50,
-                backgroundColor: Palette.primary,
-                title: const AppBarContent(
-                  title: 'Perguntas frequentes',
+      backgroundColor: Colors.white,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+              foregroundColor: Colors.white,
+              expandedHeight: kTextTabBarHeight * 2 + 50,
+              title: const AppBarContent(
+                title: 'Perguntas frequentes',
+              ),
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Palette.redGradient1, Palette.redGradient2],
+                  ),
                 ),
-                flexibleSpace: FlexibleSpaceBar(
+                child: FlexibleSpaceBar(
                   centerTitle: true,
                   stretchModes: const [StretchMode.fadeTitle],
                   background: Padding(
@@ -79,47 +82,48 @@ class _FrequentlyQuestionsScreenState extends State<FrequentlyQuestionsScreen> {
                       icon: Icons.search,
                       label: '',
                       hintText: 'Pesquisar',
+                      hasUnderlineBorder: false,
                       controller: searchController,
                     ),
                   ),
-                )),
-            if (_data.isEmpty)
-              const SliverToBoxAdapter(
-                child: Text(
-                  'Não foi encontrado nenhuma pergunta.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
                 ),
+              )),
+          if (_data.isEmpty)
+            const SliverToBoxAdapter(
+              child: Text(
+                'Não foi encontrado nenhuma pergunta.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
               ),
-            if (_data.isNotEmpty)
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (_, index) {
-                    final question = _data[index];
-                    return QuestionWidget(
-                      isSelected: questionSelected == index,
-                      title: question.question,
-                      answer: question.answer,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        setState(() {
-                          if (questionSelected == index) {
-                            questionSelected = null;
-                          } else {
-                            questionSelected = index;
-                          }
-                        });
-                      },
-                    );
-                  },
-                  childCount: _data.length,
-                ),
+            ),
+          if (_data.isNotEmpty)
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (_, index) {
+                  final question = _data[index];
+                  return QuestionWidget(
+                    isSelected: questionSelected == index,
+                    title: question.question,
+                    answer: question.answer,
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      setState(() {
+                        if (questionSelected == index) {
+                          questionSelected = null;
+                        } else {
+                          questionSelected = index;
+                        }
+                      });
+                    },
+                  );
+                },
+                childCount: _data.length,
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

@@ -15,7 +15,7 @@ class DiscoverPlaceRemoteDataSource {
   ) async {
     try {
       final query =
-          '${model.street} ${model.houseNumber}, ${model.complement} ${model.city}, ${model.state}, ${model.country}';
+          '${model.street}, ${model.houseNumber} - ${model.complement} - ${model.city}, ${model.state} - ${model.country}';
       final response = await api.dio.get(
         '',
         queryParameters: {

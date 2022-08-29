@@ -57,7 +57,13 @@ class GuideStep4 extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        Expanded(child: Image.asset('assets/step4.png')),
+        Expanded(
+          child: Center(
+            child: Image.asset(
+              'assets/step4.png',
+            ),
+          ),
+        ),
       ],
     );
   }

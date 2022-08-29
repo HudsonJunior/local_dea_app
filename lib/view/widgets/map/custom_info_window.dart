@@ -29,8 +29,8 @@ class EmergencyInfoWindow extends StatelessWidget {
           Center(
             child: Image.asset(
               model.categoria.icon,
-              width: 40,
-              height: 40,
+              width: 80,
+              height: 80,
             ),
           ),
           const SizedBox(height: 4.0),
@@ -38,14 +38,14 @@ class EmergencyInfoWindow extends StatelessWidget {
             child: Text(
               model.nome,
               style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
                 fontSize: 18.0,
               ),
             ),
           ),
           const SizedBox(height: 8.0),
-          const Divider(color: Colors.white, thickness: 0.5),
+          const Divider(color: Colors.black87, thickness: 0.5),
           const SizedBox(height: 16.0),
           InfoWindowLabel(
             icon: Icons.location_pin,

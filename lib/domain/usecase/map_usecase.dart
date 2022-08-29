@@ -32,11 +32,11 @@ class MapUseCase {
   Future<EmergencyServiceMarker?> loadData() async {
     try {
       final hospitalIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(),
+        const ImageConfiguration(size: Size(50, 50)),
         'assets/edificio-hospitalar.png',
       );
       final samuIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(),
+        const ImageConfiguration(size: Size(50, 50)),
         'assets/samu_icon.png',
       );
       final deaIcon = await BitmapDescriptor.fromAssetImage(

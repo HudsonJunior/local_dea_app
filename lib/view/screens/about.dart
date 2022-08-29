@@ -37,16 +37,23 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.primary,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Palette.primary,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [Palette.redGradient1, Palette.redGradient2],
+            ),
+          ),
+        ),
         title: const AppBarContent(
           title: 'Sobre',
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(24),
         child: AnimatedOpacity(
           opacity: opacity,
           duration: const Duration(milliseconds: 300),
@@ -57,14 +64,14 @@ class _AboutScreenState extends State<AboutScreen> {
                 'O aplicativo DEA foi desenvolvido nos projetos de TCC e PIBITI, por Hudson Junior e Giovanna Eiri, respectivamente, discentes dos curso de Ciência da Computação e Medicina da Universidade Estadual de Maringá.',
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
                 ),
               ),
               const SizedBox(height: 8.0),
               const Divider(
-                color: Colors.white,
+                color: Colors.black87,
                 thickness: 1.1,
               ),
               const SizedBox(height: 32.0),
@@ -81,7 +88,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     'LOCAL\nDEA',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Palette.secondary,
+                      color: Palette.redGradient2,
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -93,9 +100,9 @@ class _AboutScreenState extends State<AboutScreen> {
                 'O objetivo principal do aplicativo é tornar as localizações de Desfibriladores Externos Automáticos e serviços emergenciais de saúde mais acessíveis na região de Maringá, Paraná.',
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
                 ),
               ),
               const SizedBox(height: 48.0),
@@ -105,9 +112,9 @@ class _AboutScreenState extends State<AboutScreen> {
                   'Contato',
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

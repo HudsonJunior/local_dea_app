@@ -7,22 +7,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      color: Palette.primary,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [Palette.redGradient1, Palette.redGradient2],
+        ),
+      ),
       child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const BackButton(
+          children: const [
+            BackButton(
               color: Colors.white,
             ),
-            Image.asset(
-              'assets/dea_icon.png',
-              width: 50,
-              height: 50,
-            ),
-            const Expanded(
+            Expanded(
               child: Text(
                 'PARADA CARDÍACA:\nO QUE FAZER?',
                 textAlign: TextAlign.center,

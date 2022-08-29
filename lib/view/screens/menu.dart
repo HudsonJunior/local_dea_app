@@ -108,6 +108,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                 CustomSnackBar.show(
                   context,
                   'Não foi possível abrir aplicativo de e-mail.',
+                  success: false,
                 );
               }
             },
@@ -137,11 +138,20 @@ class _MenuWidgetState extends State<MenuWidget> {
             },
           ),
           const Spacer(),
-          Image.asset('assets/dea_icon.png'),
+          AspectRatio(
+            aspectRatio: 3,
+            child: Image.asset(
+              'assets/dea_icon.png',
+            ),
+          ),
           const SizedBox(height: 12),
           const Text(
             'Local DEA',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+            ),
           ),
         ],
       ),

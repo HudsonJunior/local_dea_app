@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/domain/models/calculated_route_nodel.dart';
 import 'package:local_dea_app/domain/models/emergency_service_model.dart';
@@ -19,6 +20,14 @@ class RoutingCubit extends Cubit<RoutingState> {
     required RouteMethodEnum transport,
   }) async {
     try {
+      FirebaseAnalytics.instance.logEvent(
+        name: 'buscando_rota_servico',
+        parameters: {
+          'Destino: ': 'lat: ${destiny.latitude} - lon: ${destiny.longitude}',
+          'Transporte: ': transport.name,
+        },
+      );
+
       if (state is! LoadingRouteState) emit(LoadingRouteState());
 
       final response = await routingUseCase.calculateRoute(
@@ -45,6 +54,11 @@ class RoutingCubit extends Cubit<RoutingState> {
     required RouteMethodEnum transport,
   }) async {
     emit(LoadingRouteState());
+
+    FirebaseAnalytics.instance.logEvent(
+      name: 'buscando_menor_rota',
+      parameters: {'Transporte ': transport.name},
+    );
 
     final response = await routingUseCase.calculateMatrix(
       models: models,

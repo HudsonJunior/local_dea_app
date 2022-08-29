@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/infra/resources/launcher_service.dart';
 import 'package:local_dea_app/view/widgets/custom_snackbar.dart';
 
@@ -22,12 +23,33 @@ class _EmergencyFabState extends State<EmergencyFab> {
             CustomSnackBar.show(
               context,
               'Não foi possível ligar para o SAMU',
+              success: false,
             );
           }
         },
-        backgroundColor: Colors.red,
-        label: const Text('Ligar para o SAMU'),
-        icon: const Icon(Icons.phone),
+        clipBehavior: Clip.hardEdge,
+        extendedPadding: EdgeInsets.zero,
+        extendedIconLabelSpacing: 0,
+        label: Container(
+          height: 50,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Palette.redGradient1, Palette.redGradient2],
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Center(
+              child: Row(
+            children: const [
+              Icon(Icons.phone),
+              SizedBox(width: 8),
+              Text('Ligar para o SAMU'),
+            ],
+          )),
+        ),
       ),
     );
   }

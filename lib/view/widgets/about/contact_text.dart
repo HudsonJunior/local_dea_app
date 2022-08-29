@@ -13,10 +13,12 @@ class ContactTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
           icon,
-          color: Colors.white,
+          color: Colors.black87,
+          size: 16,
         ),
         const SizedBox(width: 8.0),
         SelectableText(
@@ -27,8 +29,8 @@ class ContactTextWidget extends StatelessWidget {
           ),
           textAlign: TextAlign.start,
           style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
+            color: Colors.black87,
+            fontSize: 16.0,
             fontWeight: FontWeight.bold,
           ),
         ),

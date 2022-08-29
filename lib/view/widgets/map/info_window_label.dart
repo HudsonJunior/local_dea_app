@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/infra/resources/launcher_service.dart';
 
 class InfoWindowLabel extends StatelessWidget {
@@ -7,7 +8,7 @@ class InfoWindowLabel extends StatelessWidget {
     required this.icon,
     required this.label,
     this.showButton = false,
-    this.iconColor = Colors.white,
+    this.iconColor = Colors.black87,
   }) : super(key: key);
 
   final IconData icon;
@@ -34,7 +35,7 @@ class InfoWindowLabel extends StatelessWidget {
             maxLines: 3,
             style: TextStyle(
               color: iconColor,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               fontSize: 16.0,
             ),
           ),
@@ -48,7 +49,7 @@ class InfoWindowLabel extends StatelessWidget {
               },
               child: Card(
                 margin: const EdgeInsets.only(left: 12.0),
-                color: Colors.redAccent,
+                color: Palette.redGradient2,
                 elevation: 6.0,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -66,7 +67,7 @@ class InfoWindowLabel extends StatelessWidget {
                         'Ligar',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],

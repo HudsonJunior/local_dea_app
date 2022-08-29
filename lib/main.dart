@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_dea_app/domain/usecase/auth_usecase.dart';
@@ -5,8 +9,8 @@ import 'package:local_dea_app/domain/usecase/discover_place_usecase.dart';
 import 'package:local_dea_app/domain/usecase/register_dea_usecase.dart';
 import 'package:local_dea_app/domain/usecase/routing_usecase.dart';
 import 'package:local_dea_app/infra/datasources/auth/auth_remote_datasource.dart';
+import 'package:local_dea_app/infra/datasources/dea_remote_datasource.dart';
 import 'package:local_dea_app/infra/datasources/discover_place_remote_datasource.dart';
-import 'package:local_dea_app/infra/datasources/register_dea_remote_datasource.dart';
 import 'package:local_dea_app/infra/datasources/routing_remote_datasource.dart';
 import 'package:local_dea_app/infra/repositories/auth_repository.dart';
 import 'package:local_dea_app/infra/repositories/discover_place_repository.dart';
@@ -23,8 +27,19 @@ import 'package:local_dea_app/view/blocs/route_method_cubit.dart';
 import 'package:local_dea_app/view/blocs/routing/routing.dart';
 import 'package:local_dea_app/view/screens/map.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  runZonedGuarded(
+    () {
+      runApp(const MyApp());
+    },
+    (error, stack) {
+      FirebaseCrashlytics.instance.log(error.toString());
+      FirebaseCrashlytics.instance.recordError(error, stack);
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -70,7 +85,7 @@ class MyApp extends StatelessWidget {
             ),
             RegisterDeaUseCase(
               RegisterDeaRepository(
-                registerDeaRemoteDatasource: RegisterDeaRemoteDatasource(
+                registerDeaRemoteDatasource: DeaRemoteDatasource(
                   api: SigaApi.instance,
                 ),
               ),

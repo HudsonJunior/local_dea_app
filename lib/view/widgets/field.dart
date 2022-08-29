@@ -1,6 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   final IconData icon;
@@ -14,20 +14,22 @@ class CustomFormField extends StatelessWidget {
   final bool obscureText;
   final IconData? suffixIcon;
   final VoidCallback? onTapSuffixIcon;
+  final bool hasUnderlineBorder;
 
   const CustomFormField({
     Key? key,
     required this.icon,
     required this.label,
-    required this.controller,
-    this.isRequired = true,
-    this.keyboardType,
-    this.suffixIcon,
     this.hintText,
-    this.onTapSuffixIcon,
-    this.obscureText = false,
+    required this.controller,
+    this.keyboardType,
+    this.isRequired = true,
     this.validator,
     this.formatters,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.onTapSuffixIcon,
+    this.hasUnderlineBorder = true,
   }) : super(key: key);
 
   @override
@@ -36,76 +38,91 @@ class CustomFormField extends StatelessWidget {
       children: [
         if (label.isNotEmpty)
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 label,
                 textAlign: TextAlign.start,
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ),
         const SizedBox(height: 4.0),
-        TextFormField(
-          keyboardType: keyboardType,
-          inputFormatters: formatters,
-          obscureText: obscureText,
-          style: const TextStyle(
-            color: Palette.primary,
-            fontWeight: FontWeight.w700,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: TextFormField(
+            keyboardType: keyboardType,
+            inputFormatters: formatters,
+            obscureText: obscureText,
+            cursorColor: Colors.black,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+            controller: controller,
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: const TextStyle(color: Colors.black),
+              suffixIcon: suffixIcon != null
+                  ? IconButton(
+                      splashColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      icon: Icon(
+                        suffixIcon,
+                        color: Colors.black,
+                      ),
+                      onPressed: onTapSuffixIcon,
+                    )
+                  : null,
+              fillColor: Colors.white,
+              filled: true,
+              errorStyle: const TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.w600,
+              ),
+              errorMaxLines: 2,
+              prefixIcon: Icon(
+                icon,
+                color: Colors.black,
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              floatingLabelStyle: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+              ),
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color:
+                        hasUnderlineBorder ? Colors.black : Colors.transparent),
+              ),
+              disabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color:
+                        hasUnderlineBorder ? Colors.black : Colors.transparent),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color:
+                        hasUnderlineBorder ? Colors.black : Colors.transparent),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color:
+                        hasUnderlineBorder ? Colors.black : Colors.transparent),
+              ),
+            ),
+            validator: (text) {
+              if ((text?.isEmpty ?? true) && isRequired) {
+                return 'Campo obrigatório!';
+              }
+              if (validator != null) return validator!();
+              return null;
+            },
           ),
-          controller: controller,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: const TextStyle(color: Palette.primary),
-            suffixIcon: suffixIcon != null
-                ? IconButton(
-                    icon: Icon(suffixIcon, color: Palette.primary),
-                    onPressed: onTapSuffixIcon,
-                  )
-                : const SizedBox.shrink(),
-            fillColor: Colors.grey[200],
-            filled: true,
-            errorStyle: const TextStyle(color: Colors.white),
-            errorMaxLines: 2,
-            prefixIcon: Icon(
-              icon,
-              color: Palette.primary,
-            ),
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            floatingLabelStyle: const TextStyle(
-              fontSize: 16.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            border: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(18.0),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(18.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(18.0),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(18.0),
-            ),
-          ),
-          validator: (text) {
-            if ((text?.isEmpty ?? true) && isRequired) {
-              return 'Campo obrigatório!';
-            }
-            if (validator != null) return validator!();
-            return null;
-          },
         ),
       ],
     );

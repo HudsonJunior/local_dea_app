@@ -1,4 +1,4 @@
-package com.example.local_dea_app
+package com.local_dea_app
 
 import io.flutter.embedding.android.FlutterActivity
 

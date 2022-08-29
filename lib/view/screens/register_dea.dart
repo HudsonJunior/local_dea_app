@@ -8,7 +8,6 @@ import 'package:local_dea_app/view/widgets/custom_snackbar.dart';
 import 'package:local_dea_app/view/widgets/field.dart';
 import 'package:local_dea_app/view/widgets/register_dea/category_dea.dart';
 import 'package:local_dea_app/view/widgets/register_dea/hour_range.dart';
-import 'package:local_dea_app/view/widgets/register_dea/image_picker.dart';
 import 'package:local_dea_app/view/widgets/register_dea/private_service_checkbox.dart';
 import 'package:local_dea_app/view/widgets/register_dea/register_button.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -75,10 +74,17 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.primary,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Palette.primary,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Palette.redGradient1, Palette.redGradient2],
+            ),
+          ),
+        ),
         title: const AppBarContent(
           title: 'Cadastrar Serviço',
         ),
@@ -100,12 +106,13 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 12.0,
+            horizontal: 16,
             vertical: 18.0,
           ),
           child: Form(
             key: formKey,
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 CustomFormField(
                   label: 'Nome do serviço',
@@ -168,7 +175,7 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
                   openHour: selectedOpenHour,
                   endHour: selectedEndHour,
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 32.0),
                 CategoryDeaSelector(
                   selected: selectedCategoryDea,
                   onSelected: _onSelectedDeaCategory,
@@ -179,30 +186,34 @@ class _RegisterDeaScreenState extends State<RegisterDeaScreen> {
                   onChecked: _onCheckedPrivateService,
                 ),
                 const SizedBox(height: 16.0),
-                const CustomImagePicker(),
+                //TODO!: // const CustomImagePicker(),
                 const SizedBox(height: 32.0),
                 BlocBuilder<RegisterDeaCubit, RegisterDeaState>(
                     builder: (context, state) {
-                  return RegisterButton(
-                    isLoading: state is RegisterDeaLoadingState,
-                    onRegisterDea: () {
-                      if (formKey.currentState?.validate() ?? false) {
-                        registerDeaCubit.registerDea(
-                          street: streetController.text,
-                          houseNumber: numberController.text,
-                          privateService: _isPrivateServiceChecked,
-                          serviceName: nameController.text,
-                          serviceType: selectedCategoryDea,
-                          openHour: selectedOpenHour?.format(context),
-                          endHour: selectedEndHour?.format(context),
-                          description: descriptionController.text,
-                          contactNumber: contactNumberController.text,
-                          complement: complementController.text,
-                        );
-                      }
-                    },
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: RegisterButton(
+                      isLoading: state is RegisterDeaLoadingState,
+                      onRegisterDea: () {
+                        if (formKey.currentState?.validate() ?? false) {
+                          registerDeaCubit.registerDea(
+                            street: streetController.text,
+                            houseNumber: numberController.text,
+                            privateService: _isPrivateServiceChecked,
+                            serviceName: nameController.text,
+                            serviceType: selectedCategoryDea,
+                            openHour: selectedOpenHour?.format(context),
+                            endHour: selectedEndHour?.format(context),
+                            description: descriptionController.text,
+                            contactNumber: contactNumberController.text,
+                            complement: complementController.text,
+                          );
+                        }
+                      },
+                    ),
                   );
                 }),
+                const SizedBox(height: 32.0),
               ],
             ),
           ),

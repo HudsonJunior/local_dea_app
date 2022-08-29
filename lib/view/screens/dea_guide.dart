@@ -8,6 +8,7 @@ import 'package:local_dea_app/view/widgets/dea_guide/guide_step1.dart';
 import 'package:local_dea_app/view/widgets/dea_guide/guide_step2.dart';
 import 'package:local_dea_app/view/widgets/dea_guide/guide_step3.dart';
 import 'package:local_dea_app/view/widgets/dea_guide/guide_step4.dart';
+import 'package:local_dea_app/view/widgets/shader_gradient.dart';
 
 class DeaGuideScreen extends StatefulWidget {
   const DeaGuideScreen({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class _DeaGuideScreenState extends State<DeaGuideScreen> {
                 ),
               ),
               const Divider(
-                color: Palette.primary,
+                color: Palette.redGradient1,
                 thickness: 1.5,
               ),
               const SizedBox(height: 8.0),
@@ -62,17 +63,19 @@ class _DeaGuideScreenState extends State<DeaGuideScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: IconButton(
-                      iconSize: 50,
-                      onPressed: () {
-                        _controller.previousPage();
-                      },
-                      splashColor: Palette.primary.withOpacity(0.3),
-                      icon: const Icon(
-                        FontAwesomeIcons.circleArrowLeft,
-                        color: Palette.primary,
+                  ShaderGradient(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: IconButton(
+                        iconSize: 50,
+                        onPressed: () {
+                          _controller.previousPage();
+                        },
+                        splashColor: Palette.redGradient1.withOpacity(0.3),
+                        icon: const Icon(
+                          FontAwesomeIcons.circleArrowLeft,
+                          color: Palette.redGradient1,
+                        ),
                       ),
                     ),
                   ),
@@ -83,17 +86,19 @@ class _DeaGuideScreenState extends State<DeaGuideScreen> {
                       _controller.animateToPage(index);
                     },
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: IconButton(
-                      iconSize: 50,
-                      splashColor: Palette.primary.withOpacity(0.3),
-                      onPressed: () {
-                        _controller.nextPage();
-                      },
-                      icon: const Icon(
-                        FontAwesomeIcons.circleArrowRight,
-                        color: Palette.primary,
+                  ShaderGradient(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: IconButton(
+                        iconSize: 50,
+                        splashColor: Palette.redGradient1.withOpacity(0.3),
+                        onPressed: () {
+                          _controller.nextPage();
+                        },
+                        icon: const Icon(
+                          FontAwesomeIcons.circleArrowRight,
+                          color: Palette.redGradient1,
+                        ),
                       ),
                     ),
                   ),

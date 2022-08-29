@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/domain/models/emergency_service_type.dart';
 
 class CategoryDeaSelector extends StatelessWidget {
@@ -14,67 +13,68 @@ class CategoryDeaSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Align(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          const Align(
             alignment: Alignment.centerLeft,
             child: Text(
               'Categoria do serviço',
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 4.0),
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: DropdownButton<EmergencyServiceType>(
-            dropdownColor: Colors.white,
-            focusColor: Colors.white,
-            underline: const SizedBox.shrink(),
-            iconEnabledColor: Palette.primary,
-            isExpanded: true,
-            items: EmergencyServiceType.values
-                .map(
-                  (type) => DropdownMenuItem<EmergencyServiceType>(
-                    value: type,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          type.icon,
-                          width: 25,
-                          height: 25,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text(
-                          type.stringValue,
-                          style: const TextStyle(
-                            color: Palette.primary,
-                            fontWeight: FontWeight.w700,
+          const SizedBox(height: 8.0),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child: DropdownButton<EmergencyServiceType>(
+              dropdownColor: Colors.white,
+              focusColor: Colors.white,
+              iconEnabledColor: Colors.black87,
+              underline: const SizedBox.shrink(),
+              isExpanded: true,
+              items: EmergencyServiceType.values
+                  .map(
+                    (type) => DropdownMenuItem<EmergencyServiceType>(
+                      value: type,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            type.icon,
+                            filterQuality: FilterQuality.high,
+                            width: 40,
+                            height: 40,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 8.0),
+                          Text(
+                            type.stringValue,
+                            style: const TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
-            onChanged: onSelected,
-            value: selected,
+                  )
+                  .toList(),
+              onChanged: onSelected,
+              value: selected,
+            ),
           ),
-        )
-      ],
+          const Divider(color: Colors.black87)
+        ],
+      ),
     );
   }
 }

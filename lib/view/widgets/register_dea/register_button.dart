@@ -18,27 +18,34 @@ class RegisterButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
           elevation: 8.0,
-          primary: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
         onPressed: onRegisterDea,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Palette.redGradient1, Palette.redGradient2],
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: isLoading
-              ? const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: LoadingWidget(),
-                )
-              : const Text(
-                  'Cadastrar serviço',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Palette.primary,
-                    fontWeight: FontWeight.bold,
+              ? const Center(child: LoadingWidget())
+              : const Center(
+                  child: Text(
+                    'Cadastrar serviço',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
         ),

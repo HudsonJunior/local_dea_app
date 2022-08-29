@@ -19,12 +19,11 @@ class MapWidget extends StatefulWidget {
   MapWidgetState createState() => MapWidgetState();
 }
 
-class MapWidgetState extends State<MapWidget>
-    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
+class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   late final MapCubit mapCubit;
   late final RoutingCubit routingCubit;
   late final RouteMethodCubit routeMethodCubit;
-  late final GoogleMapController _controller;
+  late final GoogleMapController? _controller;
   // final Location _location = Location()..enableBackgroundMode(enable: true);
 
   @override
@@ -39,13 +38,13 @@ class MapWidgetState extends State<MapWidget>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      _controller.setMapStyle('[]');
+      _controller?.setMapStyle('[]');
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -59,7 +58,6 @@ class MapWidgetState extends State<MapWidget>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return BlocConsumer<MapCubit, MapState>(
       bloc: mapCubit,
       listenWhen: (_, curr) =>
@@ -71,7 +69,11 @@ class MapWidgetState extends State<MapWidget>
       },
       builder: (context, mapState) {
         if (mapState is LoadingInitialPositionState) {
-          return const Center(child: LoadingWidget());
+          return const Center(
+            child: LoadingWidget(
+              color: Palette.redGradient2,
+            ),
+          );
         }
         if (mapState is LoadedDataState) {
           return BlocConsumer<RoutingCubit, RoutingState>(
@@ -92,7 +94,7 @@ class MapWidgetState extends State<MapWidget>
                 );
               }
               if (state is LoadedRouteState) {
-                _controller.animateCamera(
+                _controller!.animateCamera(
                   CameraUpdate.newCameraPosition(
                     CameraPosition(
                       target: mapState.coordenadas,
@@ -144,7 +146,7 @@ class MapWidgetState extends State<MapWidget>
                           onTap: () {
                             showModalBottomSheet(
                               isDismissible: routeState is! LoadingRouteState,
-                              backgroundColor: Palette.primary,
+                              backgroundColor: Colors.white,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(16.0),
@@ -201,7 +203,4 @@ class MapWidgetState extends State<MapWidget>
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

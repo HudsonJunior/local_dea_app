@@ -12,7 +12,11 @@ dependencies:
   animated_text_kit: ^4.2.1
   bloc: ^8.0.3
   carousel_slider: ^4.0.0
+  cloud_firestore: ^3.3.0
   dio: ^4.0.4
+  firebase_analytics: ^9.2.0
+  firebase_core: ^1.19.2
+  firebase_crashlytics: ^2.8.5
   flutter:
     sdk: flutter
   flutter_bcrypt: ^1.0.7
@@ -26,6 +30,7 @@ dependencies:
   location: ^4.4.0
   mask_text_input_formatter: ^2.1.0
   page_transition: ^2.0.5
+  top_snackbar_flutter: ^2.1.1
   tuple: ^2.0.0
   url_launcher: ^6.0.20
 
@@ -37,7 +42,7 @@ dev_dependencies:
 flutter_icons:
   ios: true
   android: "launcher_icon"
-  image_path: "assets/dea_icon.png"
+  image_path: "assets/dea_icon_store.png"
 
 flutter:
   uses-material-design: true

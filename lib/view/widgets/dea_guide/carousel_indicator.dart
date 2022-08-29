@@ -16,23 +16,24 @@ class CarouselIndicatorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          pagesCount,
-          (index) => InkWell(
-            onTap: () => onChangePage(index),
-            child: Container(
-              height: 12.0,
-              width: 12.0,
-              margin: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Palette.primary.withOpacity(
-                  currentPage == index ? 0.9 : 0.4,
-                ),
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        pagesCount,
+        (index) => InkWell(
+          onTap: () => onChangePage(index),
+          child: Container(
+            height: 12.0,
+            width: 12.0,
+            margin: const EdgeInsets.all(4.0),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Palette.redGradient1.withOpacity(
+                currentPage == index ? 0.9 : 0.4,
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

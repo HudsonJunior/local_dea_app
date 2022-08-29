@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:local_dea_app/domain/models/emergency_service_type.dart';
 
 class EmergencyServiceModel {
@@ -29,6 +30,12 @@ class EmergencyServiceModel {
   final String? numContato;
   final bool isPrivado;
 
+  static Iterable<EmergencyServiceModel> fromJsonListFirebase(
+          List<QueryDocumentSnapshot<Map<String, dynamic>>> list) =>
+      list.map(
+        (service) => EmergencyServiceModel.fromJson(service.data()),
+      );
+
   static Iterable<EmergencyServiceModel> fromJsonList(List list) => list.map(
         (service) => EmergencyServiceModel.fromJson(service),
       );
@@ -41,8 +48,8 @@ class EmergencyServiceModel {
       'bairro': bairro,
       'inicio': horarioAbertura,
       'fim': horarioFechamento,
-      'latitude': latitude,
-      'longitude': longitude,
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
       'descricao': descricao,
       'categoria': categoria.value,
       'contato': numContato,
@@ -58,8 +65,8 @@ class EmergencyServiceModel {
       bairro: map['bairro'] ?? '',
       horarioAbertura: map['inicio'] ?? '',
       horarioFechamento: map['fim'] ?? '',
-      latitude: map['latitude']?.toDouble() ?? 0.0,
-      longitude: map['longitude']?.toDouble() ?? 0.0,
+      latitude: double.tryParse(map['latitude']) ?? 0.0,
+      longitude: double.tryParse(map['longitude']) ?? 0.0,
       descricao: map['descricao'] ?? '',
       categoria: EmergencyServiceExt.fromInt((map['categoria'])),
       numContato: map['contato'] ?? '',

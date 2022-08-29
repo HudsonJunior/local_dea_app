@@ -9,6 +9,7 @@ import 'package:local_dea_app/view/widgets/app_bar_content.dart';
 import 'package:local_dea_app/view/widgets/custom_snackbar.dart';
 import 'package:local_dea_app/view/widgets/field.dart';
 import 'package:local_dea_app/view/widgets/search_dea_button.dart';
+import 'package:local_dea_app/view/widgets/shader_gradient.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -38,13 +39,20 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Palette.primary,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Palette.redGradient1, Palette.redGradient2],
+            ),
+          ),
+        ),
         title: const AppBarContent(
           title: 'Autenticação',
         ),
       ),
-      backgroundColor: Palette.primary,
+      backgroundColor: Colors.white,
       body: BlocListener(
         bloc: authBloc,
         listener: (context, state) {
@@ -77,23 +85,34 @@ class _AuthScreenState extends State<AuthScreen> {
                   width: 80,
                   height: 80,
                 ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Para utilizar este serviço é necessário realizar o login no servidor SIGA.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                const ShaderGradient(
+                  child: Text(
+                    'Autenticação',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 48),
+                const Text(
+                  'Para utilizar este serviço é necessário realizar o login no servidor SIGA.',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 48),
                 CustomFormField(
                   icon: FontAwesomeIcons.user,
                   label: 'Usuário',
                   controller: _userController,
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 32),
                 CustomFormField(
                   icon: Icons.password_outlined,
                   label: 'Senha',
@@ -116,7 +135,7 @@ class _AuthScreenState extends State<AuthScreen> {
         bloc: authBloc,
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
             child: LocalDeaButton(
               onPress: () {
                 if (_formKey.currentState?.validate() ?? false) {
@@ -131,7 +150,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 }
               },
               isLoading: state is AuthLoadingState,
-              icon: Icons.login,
+              icon: FontAwesomeIcons.arrowRightToBracket,
               label: 'ENTRAR',
             ),
           );

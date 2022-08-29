@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "514207342136",
+    "project_id": "local-dea-flutter",
+    "storage_bucket": "local-dea-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514207342136:android:157bc8f18b30f9462ad0cd",
+        "android_client_info": {
+          "package_name": "com.local_dea_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514207342136-ncak7jq2rp23fln9sul328nfb953kfkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYsKR5SQdjZDnhjnd_iYg17DgffRY2im0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514207342136-ncak7jq2rp23fln9sul328nfb953kfkh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
