@@ -24,7 +24,7 @@ class RetryWidget extends StatelessWidget {
                 message,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Palette.primary,
+                  color: Colors.black87,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -33,12 +33,12 @@ class RetryWidget extends StatelessWidget {
                 onPressed: onRetry,
                 icon: const Icon(
                   Icons.refresh,
-                  color: Palette.secondary,
+                  color: Palette.redGradient2,
                 ),
                 label: const Text(
                   'Tentar novamente',
                   style: TextStyle(
-                    color: Palette.secondary,
+                    color: Palette.redGradient2,
                   ),
                 ),
               ),

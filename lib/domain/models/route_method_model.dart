@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum RouteMethodEnum { car, bicycle, pedestrian }
+enum RouteMethodEnum { car, pedestrian, bicycle }
 
 extension RouteMethodEnumExt on RouteMethodEnum {
   IconData get icon {
@@ -20,9 +20,9 @@ extension RouteMethodEnumExt on RouteMethodEnum {
       case 0:
         return RouteMethodEnum.car;
       case 1:
-        return RouteMethodEnum.bicycle;
-      default:
         return RouteMethodEnum.pedestrian;
+      default:
+        return RouteMethodEnum.bicycle;
     }
   }
 

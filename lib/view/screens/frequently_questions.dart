@@ -90,13 +90,18 @@ class _FrequentlyQuestionsScreenState extends State<FrequentlyQuestionsScreen> {
               )),
           if (_data.isEmpty)
             const SliverToBoxAdapter(
-              child: Text(
-                'Não foi encontrado nenhuma pergunta.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+              child: Padding(
+                padding: EdgeInsets.all(24.0),
+                child: Center(
+                  child: Text(
+                    'Não foi encontrado nenhuma pergunta.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                ),
               ),
             ),
           if (_data.isNotEmpty)

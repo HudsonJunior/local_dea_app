@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/domain/models/emergency_service_model.dart';
 import 'package:local_dea_app/domain/models/emergency_service_type.dart';
 import 'package:local_dea_app/view/blocs/routing/routing.dart';
@@ -78,7 +77,7 @@ class EmergencyInfoWindow extends StatelessWidget {
             const InfoWindowLabel(
               icon: Icons.warning,
               label: 'Este é um lugar privado!',
-              iconColor: Palette.secondary,
+              iconColor: Colors.yellow,
             ),
           ],
           const Spacer(),

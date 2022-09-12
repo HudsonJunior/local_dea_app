@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 
 class RouteMethodItem extends StatelessWidget {
   final String tip;
@@ -35,7 +34,7 @@ class RouteMethodItem extends StatelessWidget {
               );
             },
             child: Card(
-              color: Colors.white,
+              color: Colors.grey[200],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -65,23 +64,15 @@ class RouteMethodItem extends StatelessWidget {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Palette.redGradient1,
-                        Palette.redGradient2,
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
+                child: Card(
+                  color: Colors.grey[200],
+                  shape: const CircleBorder(),
+                  elevation: 6,
                   child: Center(
                     child: FaIcon(
                       icon,
                       size: isSelected ? 30 : 22,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),

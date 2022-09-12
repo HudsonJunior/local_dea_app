@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:local_dea_app/definitions/colors.dart';
 
 class RouteInfoItem extends StatelessWidget {
@@ -16,10 +15,11 @@ class RouteInfoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 10.0,
-      color: Palette.primary,
+      color: Palette.redGradient2,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
@@ -35,7 +35,6 @@ class RouteInfoItem extends StatelessWidget {
               ),
             )
           ],
-          mainAxisSize: MainAxisSize.min,
         ),
       ),
     );

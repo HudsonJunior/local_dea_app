@@ -68,7 +68,7 @@ class RoutingRemoteDatasource {
           "profile": model.transport == RouteMethodEnum.car
               ? "carFast"
               : model.transport.name,
-          "matrixAttributes": ["distances"],
+          "matrixAttributes": ["distances", "travelTimes"],
         },
         queryParameters: {
           "async": false,

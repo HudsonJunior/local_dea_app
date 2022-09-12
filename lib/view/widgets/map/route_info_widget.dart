@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/view/widgets/map/route_info_item.dart';
 
 class RouteInfoWidget extends StatelessWidget {
@@ -36,7 +35,7 @@ class RouteInfoWidget extends StatelessWidget {
               onTap: onCleanRoute,
               child: Card(
                 elevation: 10.0,
-                color: Palette.secondary,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(

@@ -46,7 +46,7 @@ class _EmergencyFabState extends State<EmergencyFab> {
             children: const [
               Icon(Icons.phone),
               SizedBox(width: 8),
-              Text('Ligar para o SAMU'),
+              Text('Ligar SAMU'),
             ],
           )),
         ),

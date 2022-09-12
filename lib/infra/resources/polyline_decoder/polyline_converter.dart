@@ -12,11 +12,11 @@ import 'package:tuple/tuple.dart';
 ///
 class Converter {
   final int precision;
-  late final int multiplier;
+  late int multiplier;
   int lastValue = 0;
 
   Converter(this.precision) {
-    multiplier = pow(10, precision).toInt();
+    multiplier = pow(10, precision) as int;
   }
 
   // Returns decoded int, new index in tuple
@@ -48,9 +48,8 @@ class Converter {
 
   // Decode single coordinate (say lat|lng|z) starting at index
   // Returns decoded coordinate, new index in tuple
-  Tuple2<double, int> decodeValue(String encoded, int index) {
-    final Tuple2<int, int> result =
-        decodeUnsignedVarint(encoded.split(''), index);
+  Tuple2<double, int> decodeValue(List<String> encoded, int index) {
+    final Tuple2<int, int> result = decodeUnsignedVarint(encoded, index);
     double coordinate = 0;
     int delta = result.item1;
     if ((delta & 1) != 0) {

@@ -14,7 +14,7 @@ class CustomImagePicker extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Card(
-            color: Palette.primary,
+            color: Palette.redGradient2,
             elevation: 12.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
@@ -53,7 +53,7 @@ class CustomImagePicker extends StatelessWidget {
             const Text(
               'Local DEA',
               style: TextStyle(
-                color: Palette.secondary,
+                color: Colors.white,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),

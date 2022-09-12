@@ -41,11 +41,11 @@ class RoutingUseCase {
       final decodedPolyline = FlexiblePolyline.decode(response.polyline);
       final polyline = Polyline(
         polylineId: PolylineId(response.id),
-        points: decodedPolyline,
+        points: decodedPolyline.map((e) => LatLng(e.lat, e.lng)).toList(),
         startCap: Cap.roundCap,
         endCap: Cap.roundCap,
         jointType: JointType.round,
-        color: Palette.primary,
+        color: Palette.redGradient2,
         width: 8,
       );
 
@@ -64,28 +64,35 @@ class RoutingUseCase {
         desiredAccuracy: LocationAccuracy.bestForNavigation,
       );
 
+      final destinyModels = models
+          .where(
+            (model) => model.categoria != EmergencyServiceType.hospital,
+          )
+          .map(
+            (model) => {"lat": model.latitude, "lng": model.longitude},
+          );
+
       final response = await routingRepository.calculateMatrix(
         MatrixCalculatingModel(
           origin: LatLng(currentLocation.latitude, currentLocation.longitude),
-          destiny: models
-              .where(
-                (model) => model.categoria != EmergencyServiceType.hospital,
-              )
-              .map(
-                (model) => {"lat": model.latitude, "lng": model.longitude},
-              ),
+          destiny: destinyModels,
           transport: transport,
         ),
       );
 
       if (response == null) return null;
+      print('teste: $response');
 
       final minDistance = response.reduce(min);
-      final minDistanceIndex =
-          response.indexWhere((value) => value == minDistance);
-      final minService = models.elementAt(minDistanceIndex);
+      print('teste: $minDistance');
 
-      return LatLng(minService.latitude, minService.longitude);
+      final minDistanceIndex = response.indexOf(minDistance);
+      print('teste: $minDistanceIndex');
+
+      final minService = destinyModels.elementAt(minDistanceIndex);
+      print('teste: $minService');
+
+      return LatLng(minService['lat']!, minService['lng']!);
     } catch (_) {
       return null;
     }
