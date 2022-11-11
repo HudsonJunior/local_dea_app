@@ -1,6 +1,5 @@
 import 'package:local_dea_app/domain/models/calculated_route_nodel.dart';
 import 'package:local_dea_app/domain/models/matrix_calculating_model.dart';
-import 'package:local_dea_app/domain/models/route_method_model.dart';
 import 'package:local_dea_app/domain/models/routing_calculate_model.dart';
 import 'package:local_dea_app/infra/resources/api_response.dart';
 import 'package:local_dea_app/infra/resources/matrix_api.dart';
@@ -65,10 +64,12 @@ class RoutingRemoteDatasource {
           ],
           "destinations": model.destiny.toList(),
           "regionDefinition": {"type": "world"},
-          "profile": model.transport == RouteMethodEnum.car
-              ? "carFast"
-              : model.transport.name,
-          "matrixAttributes": ["distances", "travelTimes"],
+          // "profile": model.transport == RouteMethodEnum.car
+          //     ? "carShort"
+          //     : model.transport.name,
+          "matrixAttributes": ["distances"],
+          "routingMode": "short",
+          "transportMode": model.transport.name,
         },
         queryParameters: {
           "async": false,
