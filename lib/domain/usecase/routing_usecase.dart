@@ -5,7 +5,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:local_dea_app/definitions/colors.dart';
 import 'package:local_dea_app/domain/models/calculated_route_nodel.dart';
 import 'package:local_dea_app/domain/models/emergency_service_model.dart';
-import 'package:local_dea_app/domain/models/emergency_service_type.dart';
 import 'package:local_dea_app/domain/models/matrix_calculating_model.dart';
 import 'package:local_dea_app/domain/models/route_method_model.dart';
 import 'package:local_dea_app/domain/models/routing_calculate_model.dart';
@@ -64,13 +63,9 @@ class RoutingUseCase {
         desiredAccuracy: LocationAccuracy.bestForNavigation,
       );
 
-      final destinyModels = models
-          .where(
-            (model) => model.categoria != EmergencyServiceType.hospital,
-          )
-          .map(
-            (model) => {"lat": model.latitude, "lng": model.longitude},
-          );
+      final destinyModels = models.map(
+        (model) => {"lat": model.latitude, "lng": model.longitude},
+      );
 
       final response = await routingRepository.calculateMatrix(
         MatrixCalculatingModel(
@@ -81,16 +76,12 @@ class RoutingUseCase {
       );
 
       if (response == null) return null;
-      print('teste: $response');
 
       final minDistance = response.reduce(min);
-      print('teste: $minDistance');
 
       final minDistanceIndex = response.indexOf(minDistance);
-      print('teste: $minDistanceIndex');
 
       final minService = destinyModels.elementAt(minDistanceIndex);
-      print('teste: $minService');
 
       return LatLng(minService['lat']!, minService['lng']!);
     } catch (_) {
