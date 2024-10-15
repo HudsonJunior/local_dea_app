@@ -1,16 +1,18 @@
-# local_dea_app
+# Local DEA App
 
-A new Flutter project.
+This Flutter application was developed as my final project for a Computer Science degree. The app’s primary feature is a map that displays markers showing the nearest Automated External Defibrillators (AEDs) to the user’s location, aimed at reducing emergency response time in cardiac events.
 
-## Getting Started
+## 📍 Key Features
 
-This project is a starting point for a Flutter application.
+- **Nearest AED Locations**: Displays nearby AEDs on an interactive map.
+- **Shortest Route Calculation**: Utilizes the HERE API to find and display the shortest routes to a specific AED or multiple AEDs.
+- **Life-Saving Focus**: Designed to facilitate rapid AED access, potentially saving lives during cardiac emergencies.
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Technologies Used
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- **Flutter**: Frontend development and UI.
+- **HERE API**: Route calculations and map functionalities.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 💡 Project Purpose
+
+This app addresses the need for rapid access to AEDs during emergencies, aiming to make locating and reaching the nearest device as efficient as possible to potentially save lives.
